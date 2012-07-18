@@ -9,23 +9,31 @@
     </header>
     <body>
 
-    <div class="install" id="chartdiv" style="height: 400px; width: 300px"></div>
+    <div class="install" id="chartdiv" style="height: 400px; width: 800px"></div>
 
     </body>
 
     <footer>
-        <?php  //Retrive Data
-            include('./connection.php');
-            $resultado = installationperversion();
-            $keys = array_keys($resultado[0]);
-            foreach( $resultado[0] as $value ) {
-                $chart1 .= "['". $value['portal_version'] . "'," .$value["COUNT( 'id' )"]. "]," ;
-            }
-
-        ?>
         <script type="text/javascript">
             //First chart
-            $.jqplot('chartdiv',  [[[1, 2],[3,5.12],[5,13.1],[7,33.6],[9,85.9],[11,219.9]]]);
+            data = [<?php include_once('./connection.php'); echo chart1('values');?>];
+            ticks = [<?php include_once('./connection.php'); echo chart1('ticks');?>];
+            $.jqplot.config.enablePlugins = true;
+            plot1 = $.jqplot('chartdiv',[data] ,{
+                animate: !$.jqplot.use_excanvas,
+                            seriesDefaults:{
+                                renderer:$.jqplot.BarRenderer,
+                                pointLabels: { show: true }
+                            },
+                            axes: {
+                                xaxis: {
+                                    renderer: $.jqplot.CategoryAxisRenderer,
+                                    ticks: ticks
+                                }
+                            },
+                            highlighter: { show: false }
+            });
+
         </script>
 
     </footer>
