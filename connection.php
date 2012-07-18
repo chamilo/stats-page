@@ -51,19 +51,25 @@ function installationperversion()
     return $table;
 }
 
-function chart1($op = 'value')
+function chart( $num = 0, $op = 'values')
 {
     $chart1 = "";
-
     $resultado = installationperversion();
     $keys = array_keys($resultado[0]);
-    foreach ($resultado[0] as $value) {
-        if ($op == "ticks") {
-            $chart1 .= "'" . $value['portal_version'] . "',"; }
-
-        else {
-            $chart1 .= $value["COUNT( 'id' )"] .","; }
+    foreach ($resultado[$num] as $value) {
+        switch($op) {
+            case "values":
+                $chart1 .= $value["COUNT( 'id' )"] .",";
+                break;
+            case "ticks":
+                $chart1 .= "'" . $value['portal_version'] . "',";
+                break;
+            case "pie":
+                $chart1 .= "['". $value['portal_version'] . "'," . $value["COUNT( 'id' )"] ."],";
+                break;
+        }
     }
-
     return rtrim($chart1, ',');
+
 }
+
