@@ -43,7 +43,7 @@
 <footer>
     <script type="text/javascript">
         //Required functions
-        <?php include_once('./connection.php');?>
+        <?php include_once('./main.php');?>
         //First chart - Installation
         var data1 = [<?php echo chart(0, 'values');?>];
         var ticks1 = [<?php echo chart(0, 'ticks');?>];
