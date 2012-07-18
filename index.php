@@ -13,9 +13,9 @@
     <script type="text/javascript" src="js/plugins/jqplot.pieRenderer.min.js"></script>
 </header>
 <body>
-
-<h1>Chamilo Stats</h1>
-
+<div id="title">
+    <h1>Chamilo Stats</h1>
+</div>
 <div id="Chart1" class="chart-section">
     <h2>Installation per Chamilo version</h2>
 
