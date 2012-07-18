@@ -3,8 +3,10 @@ html {
 }
 
 body {
-    width: 80%;
+    width: 85%;
     margin: auto;
+    padding: 20px;
+    background-color: #eee;
 }
 
 .bar {
@@ -13,4 +15,11 @@ body {
 
 .pie {
     float: right;
+}
+
+.chart-section {
+    margin-bottom: 20px;
+    height: 500px;
+    padding: 10px;
+    background-color: #ddd;
 }

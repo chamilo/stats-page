@@ -16,24 +16,28 @@
 
 <h1>Chamilo Stats</h1>
 
-<h2>Installation per Chamilo version</h2>
+<div id="Chart1" class="chart-section">
+    <h2>Installation per Chamilo version</h2>
 
-<div id="chart-install" class="bar" style="height: 400px; width: 600px"></div>
+    <div id="chart-install" class="bar" style="height: 400px; width: 600px"></div>
 
-<div id="chart-pie1" class="pie" style="height: 400px; width: 400px"></div>
+    <div id="chart-pie1" class="pie" style="height: 400px; width: 400px"></div>
 
-<h2>Courses per Chamilo version</h2>
+</div>
+<div id="Chart2" class="chart-section">
+    <h2>Courses per Chamilo version</h2>
 
-<div id="chart-courses" class="bar" style="height: 400px; width: 600px"></div>
+    <div id="chart-courses" class="bar" style="height: 400px; width: 600px"></div>
 
-<div id="chart-pie2" class="pie" style="height: 400px; width: 400px"></div>
+    <div id="chart-pie2" class="pie" style="height: 400px; width: 400px"></div>
+</div>
+<div id="Chart3" class="chart-section">
+    <h2>Users per Chamilo version</h2>
 
-<h2>Users per Chamilo version</h2>
+    <div id="chart-users" class="bar" style="height: 400px; width: 600px"></div>
 
-<div id="chart-users" class="bar" style="height: 400px; width: 600px"></div>
-
-<div id="chart-pie3" class="pie" style="height: 400px; width: 400px"></div>
-
+    <div id="chart-pie3" class="pie" style="height: 400px; width: 400px"></div>
+</div>
 </body>
 
 <footer>
@@ -64,9 +68,8 @@
         ], {
             seriesDefaults:{
                 renderer:$.jqplot.PieRenderer,
-                rendererOptions:{ sliceMargin:4 },
                 trendline:{ show:false },
-                rendererOptions:{ padding:8, showDataLabels:true }
+                rendererOptions:{ sliceMargin:4, padding:8, showDataLabels:true }
             },
             legend:{ show:true }
         });
@@ -96,9 +99,8 @@
         ], {
             seriesDefaults:{
                 renderer:$.jqplot.PieRenderer,
-                rendererOptions:{ sliceMargin:4 },
                 trendline:{ show:false },
-                rendererOptions:{ padding:8, showDataLabels:true }
+                rendererOptions:{ sliceMargin:4, padding:8, showDataLabels:true }
             },
             legend:{ show:true }
         });
@@ -128,9 +130,8 @@
         ], {
             seriesDefaults:{
                 renderer:$.jqplot.PieRenderer,
-                rendererOptions:{ sliceMargin:4 },
                 trendline:{ show:false },
-                rendererOptions:{ padding:8, showDataLabels:true }
+                rendererOptions:{ sliceMaergin:4, padding:8, showDataLabels:true }
             },
             legend:{ show:true }
         });
