@@ -12,7 +12,7 @@ function installationperversion()
 
     /* Retrieve Installation per version */
 
-    $sql = "SELECT portal_version, COUNT( 'id' ) FROM association.community AS community GROUP BY portal_version HAVING ( ( portal_version BETWEEN '1.8' AND '1.9.0' ) )";
+    $sql = "SELECT portal_version, COUNT( 'id' ) FROM ".DEFDB.".community AS community GROUP BY portal_version HAVING ( ( portal_version BETWEEN '1.8' AND '1.9.0' ) )";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[0][] = $row;
@@ -22,7 +22,7 @@ function installationperversion()
 
     /* Retrieve Courses per Version */
 
-    $sql = "SELECT portal_version, SUM( number_of_courses ) FROM association.community AS community GROUP BY portal_version HAVING ( ( portal_version BETWEEN '1.8' AND '1.9.0' ) )";
+    $sql = "SELECT portal_version, SUM( number_of_courses ) FROM ".DEFDB.".community AS community GROUP BY portal_version HAVING ( ( portal_version BETWEEN '1.8' AND '1.9.0' ) )";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[1][] = $row;
@@ -32,7 +32,7 @@ function installationperversion()
 
     /* Retrieve Courses per Version */
 
-    $sql = "SELECT portal_version, SUM( number_of_users ) FROM association.community AS community GROUP BY portal_version HAVING ( ( portal_version BETWEEN '1.8' AND '1.9.0' ) )";
+    $sql = "SELECT portal_version, SUM( number_of_users ) FROM ".DEFDB.".community AS community GROUP BY portal_version HAVING ( ( portal_version BETWEEN '1.8' AND '1.9.0' ) )";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[2][] = $row;
