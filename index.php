@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <header>
-    <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.css">
+    <link rel="stylesheet" href="css/jquery.jqplot.css">
+    <link rel="stylesheet" href="css/style.css">
     <!--[if IE]>
-    <script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+    <script type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
     <script type="text/javascript" src="js/plugins/jqplot.barRenderer.min.js"></script>
@@ -15,17 +16,23 @@
 
 <h1>Chamilo Stats</h1>
 
-<div id="chart-install" style="height: 400px; width: 800px"></div>
+<h2>Installation per Chamilo version</h2>
 
-<div id="chart-pie1" style="height: 400px; width: 400px"></div>
+<div id="chart-install" class="bar" style="height: 400px; width: 600px"></div>
 
-<div id="chart-courses" style="height: 400px; width: 800px"></div>
+<div id="chart-pie1" class="pie" style="height: 400px; width: 400px"></div>
 
-<div id="chart-pie2" style="height: 400px; width: 400px"></div>
+<h2>Courses per Chamilo version</h2>
 
-<div id="chart-users" style="height: 400px; width: 800px"></div>
+<div id="chart-courses" class="bar" style="height: 400px; width: 600px"></div>
 
-<div id="chart-pie3" style="height: 400px; width: 400px"></div>
+<div id="chart-pie2" class="pie" style="height: 400px; width: 400px"></div>
+
+<h2>Users per Chamilo version</h2>
+
+<div id="chart-users" class="bar" style="height: 400px; width: 600px"></div>
+
+<div id="chart-pie3" class="pie" style="height: 400px; width: 400px"></div>
 
 </body>
 
