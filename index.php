@@ -6,8 +6,11 @@
         <script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
         <script type="text/javascript" src="js/plugins/jqplot.barRenderer.min.js"></script>
         <script type="text/javascript" src="js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
     </header>
     <body>
+
+    <h1>Chamilo Stats</h1>
 
     <div class="install" id="chartdiv" style="height: 400px; width: 800px"></div>
 

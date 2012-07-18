@@ -60,6 +60,7 @@ function chart1($op = 'value')
     foreach ($resultado[0] as $value) {
         if ($op == "ticks") {
             $chart1 .= "'" . $value['portal_version'] . "',"; }
+
         else {
             $chart1 .= $value["COUNT( 'id' )"] .","; }
     }
