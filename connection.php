@@ -54,18 +54,32 @@ function installationperversion()
 function chart( $num = 0, $op = 'values')
 {
     $chart1 = "";
+    $dato = "";
+
+    switch($num) {
+        case 0:
+            $dato = "COUNT( 'id' )";
+            break;
+        case 1:
+            $dato = "SUM( number_of_courses )";
+            break;
+        case 2:
+            $dato = "SUM( number_of_users )";
+            break;
+    }
+
     $resultado = installationperversion();
     $keys = array_keys($resultado[0]);
     foreach ($resultado[$num] as $value) {
         switch($op) {
             case "values":
-                $chart1 .= $value["COUNT( 'id' )"] .",";
+                $chart1 .= $value[$dato] .",";
                 break;
             case "ticks":
                 $chart1 .= "'" . $value['portal_version'] . "',";
                 break;
             case "pie":
-                $chart1 .= "['". $value['portal_version'] . "'," . $value["COUNT( 'id' )"] ."],";
+                $chart1 .= "['". $value['portal_version'] . "'," . $value[$dato] ."],";
                 break;
         }
     }

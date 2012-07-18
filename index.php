@@ -66,8 +66,8 @@
     </script>
     <script type="text/javascript">
         //Second chart courses
-        var data2 = [<?php echo chart(0, 'values');?>];
-        var ticks2 = [<?php echo chart(0, 'ticks');?>];
+        var data2 = [<?php echo chart(1, 'values');?>];
+        var ticks2 = [<?php echo chart(1, 'ticks');?>];
         $.jqplot.config.enablePlugins = true;
         plot1 = $.jqplot('chart-courses', [data2], {
             animate:!$.jqplot.use_excanvas,
@@ -85,7 +85,7 @@
         });
         //Pie chart courses
         var chart2 = $.jqplot("chart-pie2", [
-            [<?php echo chart(0, 'pie');?>]
+            [<?php echo chart(1, 'pie');?>]
         ], {
             seriesDefaults:{
                 renderer:$.jqplot.PieRenderer,
@@ -98,8 +98,8 @@
     </script>
     <script type="text/javascript">
         //Third chart users
-        var data3 = [<?php echo chart(0, 'values');?>];
-        var ticks3 = [<?php echo chart(0, 'ticks');?>];
+        var data3 = [<?php echo chart(2, 'values');?>];
+        var ticks3 = [<?php echo chart(2, 'ticks');?>];
         $.jqplot.config.enablePlugins = true;
         plot1 = $.jqplot('chart-users', [data3], {
             animate:!$.jqplot.use_excanvas,
@@ -117,7 +117,7 @@
         });
         //Pie chart users
         var chart3 = $.jqplot("chart-pie3", [
-            [<?php echo chart(0, 'pie');?>]
+            [<?php echo chart(2, 'pie');?>]
         ], {
             seriesDefaults:{
                 renderer:$.jqplot.PieRenderer,
