@@ -1,23 +1,26 @@
 <!DOCTYPE html>
+<!-- HTML5 Document -->
 <html>
-<header>
+<meta charset="utf-8">
+<title>Chamilo statistics Page</title>
+<head>
     <link rel="stylesheet" href="css/jquery.jqplot.css">
     <link rel="stylesheet" href="css/style.css">
     <!--[if IE]>
-    <script type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
-    <script type="text/javascript" src="js/plugins/jqplot.barRenderer.min.js"></script>
-    <script type="text/javascript" src="js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-    <script type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
-    <script type="text/javascript" src="js/plugins/jqplot.pieRenderer.min.js"></script>
-</header>
+    <script src="js/excanvas.min.js"></script><![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.jqplot.min.js"></script>
+    <script src="js/plugins/jqplot.barRenderer.min.js"></script>
+    <script src="js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+    <script src="js/plugins/jqplot.pointLabels.min.js"></script>
+    <script src="js/plugins/jqplot.pieRenderer.min.js"></script>
+</head>
 <body>
 <div id="title">
     <h1>Chamilo Stats</h1>
 </div>
 <div id="Chart1" class="chart-section">
-    <h2>Installation per Chamilo version</h2>
+    <h2>Installation per Chamilo version (History)</h2>
 
     <div id="chart-install" class="bar" style="height: 400px; width: 600px"></div>
 
@@ -41,7 +44,7 @@
 </body>
 
 <footer>
-    <script type="text/javascript">
+    <script>
         //Required functions
         <?php include_once('./main.php');?>
         //First chart - Installation
@@ -74,7 +77,7 @@
             legend:{ show:true }
         });
     </script>
-    <script type="text/javascript">
+    <script>
         //Second chart courses
         var data2 = [<?php echo chart(1, 'values');?>];
         var ticks2 = [<?php echo chart(1, 'ticks');?>];
@@ -105,7 +108,7 @@
             legend:{ show:true }
         });
     </script>
-    <script type="text/javascript">
+    <script>
         //Third chart users
         var data3 = [<?php echo chart(2, 'values');?>];
         var ticks3 = [<?php echo chart(2, 'ticks');?>];
