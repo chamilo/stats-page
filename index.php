@@ -20,7 +20,7 @@
     <h1>Chamilo Stats</h1>
 </div>
 <div id="Chart1" class="chart-section">
-    <h2>Installation per Chamilo version (History)</h2>
+    <h2>Installation per Chamilo version (In use)</h2>
 
     <div id="chart-install" class="bar" style="height: 400px; width: 600px"></div>
 
