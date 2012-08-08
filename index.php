@@ -26,16 +26,19 @@
 </div>
 <div id="Chart4" class="chart-section">
     <h2>History of Portals Installations since 2010</h2>
+
     <div id="history-portal"></div>
 </div>
 
 <div id="Chart5" class="chart-section">
     <h2>History of Course creation since 2010</h2>
+
     <div id="history-courses"></div>
 </div>
 
 <div id="Chart6" class="chart-section">
     <h2>History of Useres in portals since 2010</h2>
+
     <div id="history-users"></div>
 </div>
 
@@ -164,30 +167,27 @@
         var data4 = [<?php echo chart(4, 'values');?>];
         var ticks4 = [<?php echo chart(4, 'ticks');?>];
         var plot1 = $.jqplot('history-portal', [data4], {
-            //animate:!$.jqplot.use_excanvas,
-            series:[
-                {
-                    renderer:$.jqplot.BarRenderer,
-                    fontSize: '8pt'
-                }
-            ],
-            axesDefaults: {
+            animate:!$.jqplot.use_excanvas,
+            seriesDefaults:{
+                renderer:$.jqplot.BarRenderer,
+            },
+            axesDefaults:{
                 tickRenderer:$.jqplot.CanvasAxisTickRenderer,
-                tickOptions: {
-                    angle: '-30',
-                    fontSize: '8pt'
+                tickOptions:{
+                    angle:'-30',
+                    fontSize:'8pt'
                 }
             },
-           axes:{
+            axes:{
                 xaxis:{
                     renderer:$.jqplot.CategoryAxisRenderer,
                     ticks:ticks4
                 },
                 yaxis:{
                     tickOptions:{
-                        formatString: '%d'
+                        formatString:'%d'
                     },
-                    min: 0
+                    min:0
                 }
             }
         });
@@ -197,27 +197,27 @@
         var data5 = [<?php echo chart(5, 'values');?>];
         var ticks5 = [<?php echo chart(5, 'ticks');?>];
         var plot1 = $.jqplot('history-courses', [data5], {
-            //animate:!$.jqplot.use_excanvas,
-            series:[
-                {renderer:$.jqplot.BarRenderer}
-            ],
-            axesDefaults: {
+            animate:!$.jqplot.use_excanvas,
+            seriesDefaults:{
+                renderer:$.jqplot.BarRenderer
+            },
+            axesDefaults:{
                 tickRenderer:$.jqplot.CanvasAxisTickRenderer,
-                tickOptions: {
-                    angle: '-30',
-                    fontSize: '8pt'
+                tickOptions:{
+                    angle:'-30',
+                    fontSize:'8pt'
                 }
             },
-           axes:{
+            axes:{
                 xaxis:{
                     renderer:$.jqplot.CategoryAxisRenderer,
                     ticks:ticks4
                 },
                 yaxis:{
                     tickOptions:{
-                        formatString: '%d'
+                        formatString:'%d'
                     },
-                    min: 0
+                    min:0
                 }
             }
         });
@@ -227,27 +227,27 @@
         var data6 = [<?php echo chart(6, 'values');?>];
         var ticks6 = [<?php echo chart(6, 'ticks');?>];
         var plot1 = $.jqplot('history-users', [data6], {
-            //animate:!$.jqplot.use_excanvas,
-            series:[
-                {renderer:$.jqplot.BarRenderer}
-            ],
-            axesDefaults: {
+            animate:!$.jqplot.use_excanvas,
+            seriesDefaults:{
+                renderer:$.jqplot.BarRenderer
+            },
+            axesDefaults:{
                 tickRenderer:$.jqplot.CanvasAxisTickRenderer,
-                tickOptions: {
-                    angle: '-30',
-                    fontSize: '8pt'
+                tickOptions:{
+                    angle:'-30',
+                    fontSize:'8pt'
                 }
             },
-           axes:{
+            axes:{
                 xaxis:{
                     renderer:$.jqplot.CategoryAxisRenderer,
                     ticks:ticks4
                 },
                 yaxis:{
                     tickOptions:{
-                        formatString: '%d'
+                        formatString:'%d'
                     },
-                    min: 0
+                    min:0
                 }
             }
         });
