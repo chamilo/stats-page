@@ -39,7 +39,7 @@
 </div>
 
 <div id="Chart6" class="chart-history">
-    <h2>History of Useres in portals since 2010</h2>
+    <h2>History of Users in portals since 2010</h2>
 
     <div id="history-users"></div>
 </div>
@@ -80,6 +80,9 @@
         animate:!$.jqplot.use_excanvas,
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,
+            rendererOptions:{
+                varyBarColor: true
+            },
             pointLabels:{ show:true }
         },
         axes:{
@@ -88,7 +91,8 @@
                 ticks:ticks1
             }
         },
-        highlighter:{ show:false }
+        highlighter:{ show:false },
+        cursor: {show: false}
     });
     //Pie chart Installation
     var chart1 = $.jqplot("chart-pie1", [
@@ -99,7 +103,9 @@
             trendline:{ show:false },
             rendererOptions:{ sliceMargin:4, padding:8, showDataLabels:true }
         },
-        legend:{ show:true }
+        legend:{ show:true },
+        highlighter:{ show:false },
+        cursor: {show: false}
     });
 </script>
 <script>
@@ -111,6 +117,9 @@
         animate:!$.jqplot.use_excanvas,
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,
+            rendererOptions:{
+                            varyBarColor: true
+                        },
             pointLabels:{ show:true }
         },
         axes:{
@@ -119,7 +128,8 @@
                 ticks:ticks2
             }
         },
-        highlighter:{ show:false }
+        highlighter:{ show:false },
+        cursor: {show: false}
     });
     //Pie chart courses
     var chart2 = $.jqplot("chart-pie2", [
@@ -130,7 +140,9 @@
             trendline:{ show:false },
             rendererOptions:{ sliceMargin:4, padding:8, showDataLabels:true }
         },
-        legend:{ show:true }
+        legend:{ show:true },
+        highlighter:{ show:false },
+        cursor: {show: false}
     });
 </script>
 <script>
@@ -142,6 +154,9 @@
         animate:!$.jqplot.use_excanvas,
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,
+            rendererOptions:{
+                            varyBarColor: true
+                        },
             pointLabels:{ show:true }
         },
         axes:{
@@ -150,7 +165,8 @@
                 ticks:ticks3
             }
         },
-        highlighter:{ show:false }
+        highlighter:{ show:false },
+        cursor: {show: false}
     });
     //Pie chart users
     var chart3 = $.jqplot("chart-pie3", [
@@ -159,9 +175,11 @@
         seriesDefaults:{
             renderer:$.jqplot.PieRenderer,
             trendline:{ show:false },
-            rendererOptions:{ sliceMaergin:4, padding:8, showDataLabels:true }
+            rendererOptions:{ sliceMargin:4, padding:8, showDataLabels:true }
         },
-        legend:{ show:true }
+        legend:{ show:true },
+        highlighter:{ show:false },
+        cursor: {show: false}
     });
 </script>
 <script>
@@ -169,7 +187,7 @@
     var data4 = [<?php echo chart(4, 'values');?>];
     var ticks4 = [<?php echo chart(4, 'ticks');?>];
     var plot1 = $.jqplot('history-portal', [data4], {
-        seriesColors: [ "#c5b47f"],
+        seriesColors: [ "#4bb2c5"],
         animate:!$.jqplot.use_excanvas,
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,
@@ -212,7 +230,7 @@
     var data5 = [<?php echo chart(5, 'values');?>];
     var ticks5 = [<?php echo chart(5, 'ticks');?>];
     var plot1 = $.jqplot('history-courses', [data5], {
-        seriesColors: ["#579575"],
+        seriesColors: ["#c5b47f"],
         animate:!$.jqplot.use_excanvas,
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,
@@ -255,7 +273,7 @@
     var data6 = [<?php echo chart(6, 'values');?>];
     var ticks6 = [<?php echo chart(6, 'ticks');?>];
     var plot1 = $.jqplot('history-users', [data6], {
-        seriesColors: [ "#953579"],
+        seriesColors: [ "#579575"],
         animate:!$.jqplot.use_excanvas,
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,
