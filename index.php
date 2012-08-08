@@ -14,13 +14,33 @@
     <script src="js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
     <script src="js/plugins/jqplot.pointLabels.min.js"></script>
     <script src="js/plugins/jqplot.pieRenderer.min.js"></script>
+    <script src="js/plugins/jqplot.dateAxisRenderer.min.js"></script>
+    <script src="js/plugins/jqplot.canvasTextRenderer.min.js"></script>
+    <script src="js/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+    <script src="js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+    <script src="js/plugins/jqplot.barRenderer.min.js"></script>
 </head>
 <body>
 <div id="title">
     <h1>Chamilo Stats</h1>
 </div>
+<div id="Chart4" class="chart-section">
+    <h2>History of Portals Installations since 2010</h2>
+    <div id="history-portal"></div>
+</div>
+
+<div id="Chart5" class="chart-section">
+    <h2>History of Course creation since 2010</h2>
+    <div id="history-courses"></div>
+</div>
+
+<div id="Chart6" class="chart-section">
+    <h2>History of Useres in portals since 2010</h2>
+    <div id="history-users"></div>
+</div>
+
 <div id="Chart1" class="chart-section">
-    <h2>Installation per Chamilo version (In use)</h2>
+    <h2>Installation per Chamilo version</h2>
 
     <div id="chart-install" class="bar" style="height: 400px; width: 600px"></div>
 
@@ -51,7 +71,7 @@
         var data1 = [<?php echo chart(0, 'values');?>];
         var ticks1 = [<?php echo chart(0, 'ticks');?>];
         $.jqplot.config.enablePlugins = true;
-        plot1 = $.jqplot('chart-install', [data1], {
+        var plot1 = $.jqplot('chart-install', [data1], {
             animate:!$.jqplot.use_excanvas,
             seriesDefaults:{
                 renderer:$.jqplot.BarRenderer,
@@ -82,7 +102,7 @@
         var data2 = [<?php echo chart(1, 'values');?>];
         var ticks2 = [<?php echo chart(1, 'ticks');?>];
         $.jqplot.config.enablePlugins = true;
-        plot1 = $.jqplot('chart-courses', [data2], {
+        var plot1 = $.jqplot('chart-courses', [data2], {
             animate:!$.jqplot.use_excanvas,
             seriesDefaults:{
                 renderer:$.jqplot.BarRenderer,
@@ -113,7 +133,7 @@
         var data3 = [<?php echo chart(2, 'values');?>];
         var ticks3 = [<?php echo chart(2, 'ticks');?>];
         $.jqplot.config.enablePlugins = true;
-        plot1 = $.jqplot('chart-users', [data3], {
+        var plot1 = $.jqplot('chart-users', [data3], {
             animate:!$.jqplot.use_excanvas,
             seriesDefaults:{
                 renderer:$.jqplot.BarRenderer,
@@ -139,6 +159,98 @@
             legend:{ show:true }
         });
     </script>
+    <script>
+        //History portals
+        var data4 = [<?php echo chart(4, 'values');?>];
+        var ticks4 = [<?php echo chart(4, 'ticks');?>];
+        var plot1 = $.jqplot('history-portal', [data4], {
+            //animate:!$.jqplot.use_excanvas,
+            series:[
+                {
+                    renderer:$.jqplot.BarRenderer,
+                    fontSize: '8pt'
+                }
+            ],
+            axesDefaults: {
+                tickRenderer:$.jqplot.CanvasAxisTickRenderer,
+                tickOptions: {
+                    angle: '-30',
+                    fontSize: '8pt'
+                }
+            },
+           axes:{
+                xaxis:{
+                    renderer:$.jqplot.CategoryAxisRenderer,
+                    ticks:ticks4
+                },
+                yaxis:{
+                    tickOptions:{
+                        formatString: '%d'
+                    },
+                    min: 0
+                }
+            }
+        });
+    </script>
+    <script>
+        //History portals
+        var data5 = [<?php echo chart(5, 'values');?>];
+        var ticks5 = [<?php echo chart(5, 'ticks');?>];
+        var plot1 = $.jqplot('history-courses', [data5], {
+            //animate:!$.jqplot.use_excanvas,
+            series:[
+                {renderer:$.jqplot.BarRenderer}
+            ],
+            axesDefaults: {
+                tickRenderer:$.jqplot.CanvasAxisTickRenderer,
+                tickOptions: {
+                    angle: '-30',
+                    fontSize: '8pt'
+                }
+            },
+           axes:{
+                xaxis:{
+                    renderer:$.jqplot.CategoryAxisRenderer,
+                    ticks:ticks4
+                },
+                yaxis:{
+                    tickOptions:{
+                        formatString: '%d'
+                    },
+                    min: 0
+                }
+            }
+        });
+    </script>
+    <script>
+        //History portals
+        var data6 = [<?php echo chart(6, 'values');?>];
+        var ticks6 = [<?php echo chart(6, 'ticks');?>];
+        var plot1 = $.jqplot('history-users', [data6], {
+            //animate:!$.jqplot.use_excanvas,
+            series:[
+                {renderer:$.jqplot.BarRenderer}
+            ],
+            axesDefaults: {
+                tickRenderer:$.jqplot.CanvasAxisTickRenderer,
+                tickOptions: {
+                    angle: '-30',
+                    fontSize: '8pt'
+                }
+            },
+           axes:{
+                xaxis:{
+                    renderer:$.jqplot.CategoryAxisRenderer,
+                    ticks:ticks4
+                },
+                yaxis:{
+                    tickOptions:{
+                        formatString: '%d'
+                    },
+                    min: 0
+                }
+            }
+        });
+    </script>
 </footer>
-
 </html>
