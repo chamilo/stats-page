@@ -26,19 +26,19 @@
 <div id="title">
     <h1>Chamilo Stats</h1>
 </div>
-<div id="Chart4" class="chart-section">
+<div id="Chart4" class="chart-history">
     <h2>History of Portals Installations since 2010</h2>
 
     <div id="history-portal"></div>
 </div>
 
-<div id="Chart5" class="chart-section">
+<div id="Chart5" class="chart-history">
     <h2>History of Course creation since 2010</h2>
 
     <div id="history-courses"></div>
 </div>
 
-<div id="Chart6" class="chart-section">
+<div id="Chart6" class="chart-history">
     <h2>History of Useres in portals since 2010</h2>
 
     <div id="history-users"></div>

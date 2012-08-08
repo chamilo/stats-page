@@ -66,6 +66,16 @@ body {
 
 }
 
+.chart-history {
+    margin-bottom: 20px;
+    height: 380px;
+    padding: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px 6px #aaa;
+
+}
+
 h1 {
     font-family: "SansationBold","san-serif";
     text-shadow: 0 1px 0 white;
