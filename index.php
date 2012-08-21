@@ -21,6 +21,7 @@
     <script src="js/plugins/jqplot.barRenderer.min.js"></script>
     <script src="js/plugins/jqplot.highlighter.min.js"></script>
     <script src="js/plugins/jqplot.cursor.min.js"></script>
+    <script src="js/csgfx.js"></script>
 </head>
 <body>
 <div id="title">
@@ -73,243 +74,37 @@
     //Required functions
     <?php include_once('./main.php');?>
     //First chart - Installation
+    $.jqplot.config.enablePlugins = true;
     var data1 = [<?php echo chart(0, 'values');?>];
     var ticks1 = [<?php echo chart(0, 'ticks');?>];
-    $.jqplot.config.enablePlugins = true;
-    var plot1 = $.jqplot('chart-install', [data1], {
-        animate:!$.jqplot.use_excanvas,
-        seriesDefaults:{
-            renderer:$.jqplot.BarRenderer,
-            rendererOptions:{
-                varyBarColor: true
-            },
-            pointLabels:{ show:true }
-        },
-        axes:{
-            xaxis:{
-                renderer:$.jqplot.CategoryAxisRenderer,
-                ticks:ticks1
-            }
-        },
-        highlighter:{ show:false },
-        cursor: {show: false}
-    });
-    //Pie chart Installation
-    var chart1 = $.jqplot("chart-pie1", [
-        [<?php echo chart(0, 'pie');?>]
-    ], {
-        seriesDefaults:{
-            renderer:$.jqplot.PieRenderer,
-            trendline:{ show:false },
-            rendererOptions:{ sliceMargin:4, padding:8, showDataLabels:true }
-        },
-        legend:{ show:true },
-        highlighter:{ show:false },
-        cursor: {show: false}
-    });
-</script>
-<script>
+    csbarplot('chart-install', data1, ticks1);
+    var pie1 = [<?php echo chart(0, 'pie');?>];
+    cspieplot("chart-pie1", pie1);
     //Second chart courses
     var data2 = [<?php echo chart(1, 'values');?>];
     var ticks2 = [<?php echo chart(1, 'ticks');?>];
-    $.jqplot.config.enablePlugins = true;
-    var plot1 = $.jqplot('chart-courses', [data2], {
-        animate:!$.jqplot.use_excanvas,
-        seriesDefaults:{
-            renderer:$.jqplot.BarRenderer,
-            rendererOptions:{
-                            varyBarColor: true
-                        },
-            pointLabels:{ show:true }
-        },
-        axes:{
-            xaxis:{
-                renderer:$.jqplot.CategoryAxisRenderer,
-                ticks:ticks2
-            }
-        },
-        highlighter:{ show:false },
-        cursor: {show: false}
-    });
-    //Pie chart courses
-    var chart2 = $.jqplot("chart-pie2", [
-        [<?php echo chart(1, 'pie');?>]
-    ], {
-        seriesDefaults:{
-            renderer:$.jqplot.PieRenderer,
-            trendline:{ show:false },
-            rendererOptions:{ sliceMargin:4, padding:8, showDataLabels:true }
-        },
-        legend:{ show:true },
-        highlighter:{ show:false },
-        cursor: {show: false}
-    });
-</script>
-<script>
+    csbarplot('chart-courses', data2, ticks2);
+    var pie2 = [<?php echo chart(1, 'pie');?>];
+    cspieplot('chart-pie2',pie2);
     //Third chart users
     var data3 = [<?php echo chart(2, 'values');?>];
     var ticks3 = [<?php echo chart(2, 'ticks');?>];
-    $.jqplot.config.enablePlugins = true;
-    var plot1 = $.jqplot('chart-users', [data3], {
-        animate:!$.jqplot.use_excanvas,
-        seriesDefaults:{
-            renderer:$.jqplot.BarRenderer,
-            rendererOptions:{
-                            varyBarColor: true
-                        },
-            pointLabels:{ show:true }
-        },
-        axes:{
-            xaxis:{
-                renderer:$.jqplot.CategoryAxisRenderer,
-                ticks:ticks3
-            }
-        },
-        highlighter:{ show:false },
-        cursor: {show: false}
-    });
+    csbarplot('chart-users', data3, ticks3);
     //Pie chart users
-    var chart3 = $.jqplot("chart-pie3", [
-        [<?php echo chart(2, 'pie');?>]
-    ], {
-        seriesDefaults:{
-            renderer:$.jqplot.PieRenderer,
-            trendline:{ show:false },
-            rendererOptions:{ sliceMargin:4, padding:8, showDataLabels:true }
-        },
-        legend:{ show:true },
-        highlighter:{ show:false },
-        cursor: {show: false}
-    });
-</script>
-<script>
+    var pie3 = [<?php echo chart(2, 'pie');?>];
+    cspieplot('chart-pie3',pie3);
     //History portals
     var data4 = [<?php echo chart(4, 'values');?>];
     var ticks4 = [<?php echo chart(4, 'ticks');?>];
-    var plot1 = $.jqplot('history-portal', [data4], {
-        seriesColors: [ "#4bb2c5"],
-        animate:!$.jqplot.use_excanvas,
-        seriesDefaults:{
-            renderer:$.jqplot.BarRenderer,
-            rendererOptions:{
-                varyBarColor:false
-            },
-            pointLabels:{show:false}
-        },
-        axesDefaults:{
-            tickRenderer:$.jqplot.CanvasAxisTickRenderer,
-            tickOptions:{
-                angle:'-30',
-                fontSize:'8pt'
-            }
-        },
-        axes:{
-            xaxis:{
-                label:'Year-Month',
-                renderer:$.jqplot.CategoryAxisRenderer,
-                ticks:ticks4
-            },
-            yaxis:{
-                tickOptions:{
-                    formatString:'%d'
-                },
-                min:0
-            }
-        },
-        highlighter:{
-            show:true,
-            showMarker:false,
-            tooltipAxes:'y',
-            formatString:'Portals: %d'
-        },
-        cursor: {show: false}
-    });
-</script>
-<script>
+    cshbarplot('history-portal', data4, ticks4, 'Portals');
     //History courses
     var data5 = [<?php echo chart(5, 'values');?>];
     var ticks5 = [<?php echo chart(5, 'ticks');?>];
-    var plot1 = $.jqplot('history-courses', [data5], {
-        seriesColors: ["#c5b47f"],
-        animate:!$.jqplot.use_excanvas,
-        seriesDefaults:{
-            renderer:$.jqplot.BarRenderer,
-            rendererOptions:{
-                varyBarColor:false
-            },
-            pointLabels:{show:false}
-        },
-        axesDefaults:{
-            tickRenderer:$.jqplot.CanvasAxisTickRenderer,
-            tickOptions:{
-                angle:'-30',
-                fontSize:'8pt'
-            }
-        },
-        axes:{
-            xaxis:{
-                label:'Year-Month',
-                renderer:$.jqplot.CategoryAxisRenderer,
-                ticks:ticks4
-            },
-            yaxis:{
-                tickOptions:{
-                    formatString:'%d'
-                },
-                min:0
-            }
-        },
-        highlighter:{
-            show:true,
-            showMarker:false,
-            tooltipAxes:'y',
-            formatString:'Courses: %d'
-        },
-        cursor: {show: false}
-    });
-</script>
-<script>
+    cshbarplot('history-courses', data5, ticks5, 'Courses');
     //History users
     var data6 = [<?php echo chart(6, 'values');?>];
     var ticks6 = [<?php echo chart(6, 'ticks');?>];
-    var plot1 = $.jqplot('history-users', [data6], {
-        seriesColors: [ "#579575"],
-        animate:!$.jqplot.use_excanvas,
-        seriesDefaults:{
-            renderer:$.jqplot.BarRenderer,
-            rendererOptions:{
-                varyBarColor:false
-            },
-            pointLabels:{show:false}
-        },
-        axesDefaults:{
-            tickRenderer:$.jqplot.CanvasAxisTickRenderer,
-            tickOptions:{
-                angle:'-30',
-                fontSize:'8pt'
-            }
-        },
-        axes:{
-            xaxis:{
-                label:'Year-Month',
-                renderer:$.jqplot.CategoryAxisRenderer,
-                ticks:ticks4
-            },
-            yaxis:{
-                tickOptions:{
-                    formatString:'%d'
-                },
-                min:0
-            }
-        },
-        highlighter:{
-            show:true,
-            showMarker:false,
-            tooltipAxes:'y',
-            formatString:'Users: %d'
-        },
-        cursor: {show: false}
-    });
+    cshbarplot('history-users', data6, ticks6, 'Users');
 </script>
 </footer>
 </html>
