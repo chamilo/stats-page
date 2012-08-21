@@ -41,9 +41,9 @@ function cspieplot(container, pie) {
         });
     }
 
-function cshbarplot(container, data,ticks, portal) {
+function cshbarplot(container, data,ticks, portal, color) {
     return $.jqplot(container, [data], {
-        seriesColors:[ "#4bb2c5"],
+        seriesColors:[ color],
         animate:!$.jqplot.use_excanvas,
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,

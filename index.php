@@ -96,15 +96,15 @@
     //History portals
     var data4 = [<?php echo chart(4, 'values');?>];
     var ticks4 = [<?php echo chart(4, 'ticks');?>];
-    cshbarplot('history-portal', data4, ticks4, 'Portals');
+    cshbarplot('history-portal', data4, ticks4, 'Portals','#4BB2C5');
     //History courses
     var data5 = [<?php echo chart(5, 'values');?>];
     var ticks5 = [<?php echo chart(5, 'ticks');?>];
-    cshbarplot('history-courses', data5, ticks5, 'Courses');
+    cshbarplot('history-courses', data5, ticks5, 'Courses', '#839557');
     //History users
     var data6 = [<?php echo chart(6, 'values');?>];
     var ticks6 = [<?php echo chart(6, 'ticks');?>];
-    cshbarplot('history-users', data6, ticks6, 'Users');
+    cshbarplot('history-users', data6, ticks6, 'Users', '#C5B47F');
 </script>
 </footer>
 </html>
