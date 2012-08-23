@@ -8,40 +8,40 @@
 
 
 function csbarplot(container, data, ticks) {
-       return $.jqplot(container, [data], {
-           animate:!$.jqplot.use_excanvas,
-           seriesDefaults:{
-               renderer:$.jqplot.BarRenderer,
-               rendererOptions:{
-                   varyBarColor:true
-               },
-               pointLabels:{ show:true }
-           },
-           axes:{
-               xaxis:{
-                   renderer:$.jqplot.CategoryAxisRenderer,
-                   ticks:ticks
-               }
-           },
-           highlighter:{ show:false },
-           cursor:{show:false}
-       });
-   }
+    return $.jqplot(container, [data], {
+        animate:!$.jqplot.use_excanvas,
+        seriesDefaults:{
+            renderer:$.jqplot.BarRenderer,
+            rendererOptions:{
+                varyBarColor:true
+            },
+            pointLabels:{ show:true }
+        },
+        axes:{
+            xaxis:{
+                renderer:$.jqplot.CategoryAxisRenderer,
+                ticks:ticks
+            }
+        },
+        highlighter:{ show:false },
+        cursor:{show:false}
+    });
+}
 
 function cspieplot(container, pie) {
-        return $.jqplot(container, [pie], {
-            seriesDefaults:{
-                renderer:$.jqplot.PieRenderer,
-                trendline:{ show:false },
-                rendererOptions:{ sliceMargin:4, padding:8, showDataLabels:true }
-            },
-            legend:{ show:true },
-            highlighter:{ show:false },
-            cursor:{show:false}
-        });
-    }
+    return $.jqplot(container, [pie], {
+        seriesDefaults:{
+            renderer:$.jqplot.PieRenderer,
+            trendline:{ show:false },
+            rendererOptions:{ sliceMargin:4, padding:8, showDataLabels:true }
+        },
+        legend:{ show:true },
+        highlighter:{ show:false },
+        cursor:{show:false}
+    });
+}
 
-function cshbarplot(container, data,ticks, portal, color) {
+function cshbarplot(container, data, ticks, portal, color) {
     return $.jqplot(container, [data], {
         seriesColors:[ color],
         animate:!$.jqplot.use_excanvas,
@@ -76,7 +76,7 @@ function cshbarplot(container, data,ticks, portal, color) {
             show:true,
             showMarker:false,
             tooltipAxes:'y',
-            formatString:portal+': %d'
+            formatString:portal + ': %d'
         },
         cursor:{show:false}
     });
