@@ -28,15 +28,12 @@ include_once('connection.php');
 $mydb = new mysqli(SERVER, DBUSER, DBPASSWORD, DEFDB);
 
 $sql1 = "CREATE VIEW register AS SELECT portal_ip AS portal_ip, portal_url AS portal_url, MAX(registered_on) AS max_register FROM community GROUP BY portal_ip, portal_url";
-$sql2 = <<<QUERY
-   CREATE VIEW resume AS
-   SELECT community.portal_ip, community.portal_url, community.portal_version, community.number_of_courses, community.number_of_users
-   FROM register, association.community AS community
-   WHERE register.portal_ip = community.portal_ip
-   AND register.portal_url = community.portal_url
-   AND register.max_register = community.registered_on;
-QUERY;
-
+$sql2 = "CREATE VIEW resume AS
+         SELECT community.portal_ip, community.portal_url, community.portal_version, community.number_of_courses, community.number_of_users
+         FROM register, " . DEFDB . ".community AS community
+         WHERE register.portal_ip = community.portal_ip
+         AND register.portal_url = community.portal_url
+         AND register.max_register = community.registered_on;";
 $result1 = $mydb->query($sql1);
 $result2 = $mydb->query($sql2);
 
