@@ -28,7 +28,7 @@
     <h1>Chamilo Stats</h1>
 </div>
 <div id="Chart4" class="chart-history">
-    <h2>History of Portals Installations</h2>
+    <h2>History of Portals Installation</h2>
 
     <div id="history-portal"></div>
 </div>
