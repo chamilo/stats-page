@@ -40,7 +40,7 @@ function retrievedata() {
 
     /* Retrieve Installation per version */
 
-    $sql = "SELECT LEFT(portal_version,5) AS portal, COUNT( 'id' ) AS number FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.0' ) )";
+    $sql = "SELECT LEFT(portal_version,5) AS portal, COUNT( 'id' ) AS number FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.2' ) )";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[0][] = $row;
@@ -48,7 +48,7 @@ function retrievedata() {
 
     /* Retrieve Courses per Version */
 
-    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_courses ) AS numcourses FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.0' ) )";
+    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_courses ) AS numcourses FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.2' ) )";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[1][] = $row;
@@ -57,7 +57,7 @@ function retrievedata() {
 
     /* Retrieve Courses per Version */
 
-    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.0' ) )";
+    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.2' ) )";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[2][] = $row;
@@ -65,7 +65,7 @@ function retrievedata() {
 
     /* Retieve History per portals */
 
-    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.0' ) )";
+    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.2' ) )";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[3][] = $row;
