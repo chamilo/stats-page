@@ -12,12 +12,12 @@ include('../main.php');
 class testStats extends PHPUnit_Framework_TestCase
 {
     public function testConection() {
-        $data = retrivedata();
+        $data = retrievedata();
         $this->assertNotEmpty($data);
     }
 
     public function testData() {
-        $tamano = sizeof(retrivedata());
+        $tamano = sizeof(retrievedata());
         $this->assertEquals($tamano,7);
     }
 

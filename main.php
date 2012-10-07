@@ -1,8 +1,18 @@
 <?php
-
+/**
+ * This script generates graphics for the Chamilo user stats, as shown on 
+ * http://version.chamilo.org/community.php
+ * @package chamilo.website.stats
+ * @author Alberto Torreblanca
+ */
+/**
+ * Includes
+ */
 include_once('connection.php');
-
-/* Retrive DATA */
+/**
+ * Functions
+ */
+/* Retrieve DATA */
 /* Retrieve Installation per version */
 
 /* Crate the VIEWS in the database ...
@@ -20,15 +30,17 @@ AND register.max_register = community.registered_on;
 ** This views are for historical growth **
 
 */
-
-function retrivedata()
-{
+/**
+ * Retrieves the data from the database and return it as a table
+ * @return array Table of results
+ */
+function retrievedata() {
 
     $mydb = new mysqli(SERVER, DBUSER, DBPASSWORD, DEFDB);
 
     /* Retrieve Installation per version */
 
-    $sql = "SELECT LEFT(portal_version,5) AS portal, COUNT( 'id' ) AS number FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.0' ) )";
+    $sql = "SELECT LEFT(portal_version,5) AS portal, COUNT( 'id' ) AS number FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.2' ) )";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[0][] = $row;
@@ -36,7 +48,7 @@ function retrivedata()
 
     /* Retrieve Courses per Version */
 
-    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_courses ) AS numcourses FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.0' ) )";
+    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_courses ) AS numcourses FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.2' ) )";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[1][] = $row;
@@ -45,7 +57,7 @@ function retrivedata()
 
     /* Retrieve Courses per Version */
 
-    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.0' ) )";
+    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.2' ) )";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[2][] = $row;
@@ -53,7 +65,7 @@ function retrivedata()
 
     /* Retieve History per portals */
 
-    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.0' ) )";
+    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.2' ) )";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[3][] = $row;
@@ -89,7 +101,12 @@ function retrivedata()
 
     return $table;
 }
-
+/**
+ * Formats the charts data
+ * @param int Type of data to show in chart
+ * @param string Type of chart
+ * @return string Formatted chart data to be treated by JS
+ */
 function chart($num = 0, $op = 'values')
 {
     $chart1 = "";
@@ -116,7 +133,7 @@ function chart($num = 0, $op = 'values')
             break;
     }
 
-    $resultado = retrivedata();
+    $resultado = retrievedata();
     $keys = array_keys($resultado[0]);
     foreach ($resultado[$num] as $value) {
         switch ($op) {
