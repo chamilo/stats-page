@@ -27,24 +27,35 @@
 <div id="title">
     <h1>Chamilo Stats</h1>
 </div>
+<a name="history-portal" />
 <div id="Chart4" class="chart-history">
     <h2>History of Portals Installation</h2>
 
     <div id="history-portal"></div>
 </div>
 
+<a name="history-courses" />
 <div id="Chart5" class="chart-history">
     <h2>History of Course creation</h2>
 
     <div id="history-courses"></div>
 </div>
 
+<a name="history-users" />
 <div id="Chart6" class="chart-history">
     <h2>History of Users in portals</h2>
 
     <div id="history-users"></div>
 </div>
 
+<a name="history-sessions" />
+<div id="Chart7" class="chart-history">
+    <h2>History of Sessions in portals</h2>
+
+    <div id="history-sessions"></div>
+</div>
+
+<a name="chart-install" />
 <div id="Chart1" class="chart-section">
     <h2>Installation per version</h2>
 
@@ -53,6 +64,7 @@
     <div id="chart-pie1" class="pie" style="height: 400px; width: 400px"></div>
 
 </div>
+<a name="chart-courses" />
 <div id="Chart2" class="chart-section">
     <h2>Courses per version</h2>
 
@@ -60,6 +72,7 @@
 
     <div id="chart-pie2" class="pie" style="height: 400px; width: 400px"></div>
 </div>
+<a name="chart-users" />
 <div id="Chart3" class="chart-section">
     <h2>Users per version</h2>
 
@@ -105,6 +118,10 @@
         var data6 = [<?php echo chart(6, 'values');?>];
         var ticks6 = [<?php echo chart(6, 'ticks');?>];
         cshbarplot('history-users', data6, ticks6, 'Users', '#C5B47F');
+        //History sessions
+        var data7 = [<?php echo chart(7, 'values');?>];
+        var ticks7 = [<?php echo chart(7, 'ticks');?>];
+        cshbarplot('history-sessions', data7, ticks7, 'Sessions', '#C5542F');
     </script>
 </footer>
 </html>

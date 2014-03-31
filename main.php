@@ -39,8 +39,8 @@ function retrievedata() {
     $mydb = new mysqli(SERVER, DBUSER, DBPASSWORD, DEFDB);
 
     /* Retrieve Installation per version */
-
-    $sql = "SELECT LEFT(portal_version,5) AS portal, COUNT( 'id' ) AS number FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.6' ) )";
+    // CHA_VERSIONS is defined in connection.php
+    $sql = "SELECT LEFT(portal_version,6) AS portal, COUNT( 'id' ) AS number FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (".CHA_VERSIONS.") ) ) ORDER BY LENGTH(portal),portal";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[0][] = $row;
@@ -48,16 +48,16 @@ function retrievedata() {
 
     /* Retrieve Courses per Version */
 
-    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_courses ) AS numcourses FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.6' ) )";
+    $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_courses ) AS numcourses FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (".CHA_VERSIONS.") ) ) ORDER BY LENGTH(portal),portal";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[1][] = $row;
     }
 
 
-    /* Retrieve Courses per Version */
+    /* Retrieve Users per Version */
 
-    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.6' ) )";
+    $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (".CHA_VERSIONS_NO_USERS.") ) ) ORDER BY LENGTH(portal),portal";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[2][] = $row;
@@ -65,7 +65,7 @@ function retrievedata() {
 
     /* Retieve History per portals */
 
-    $sql = "SELECT LEFT(portal_version,5) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal BETWEEN '1.8' AND '1.9.6' ) )";
+    $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (".CHA_VERSIONS.") ) )";
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[3][] = $row;
@@ -93,6 +93,14 @@ function retrievedata() {
     $result = $mydb->query($sql);
     while ($row = $result->fetch_assoc()) {
         $table[6][] = $row;
+    }
+
+    /* Number of sessions per month since 2010*/
+
+    $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numsessions) as N FROM " . DEFDB . ".history GROUP BY fecha;";
+    $result = $mydb->query($sql);
+    while ($row = $result->fetch_assoc()) {
+        $table[7][] = $row;
     }
 
 
@@ -128,6 +136,7 @@ function chart($num = 0, $op = 'values')
         case 4:
         case 5:
         case 6:
+        case 7:
             $etiqueta = "fecha";
             $dato = "N";
             break;

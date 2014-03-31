@@ -1,4 +1,4 @@
-/*@font-face {
+@font-face {
     font-family: 'SansationRegular';
     src: url('../fonts/Sansation_Regular-webfont.eot');
     src: url('../fonts/Sansation_Regular-webfont.eot?#iefix') format('embedded-opentype'),
@@ -32,7 +32,7 @@
     font-weight: normal;
     font-style: normal;
 
-}*/
+}
 
 html {
     width: 1280px;
@@ -40,10 +40,10 @@ html {
 }
 
 body {
-    width: 88%;
+    width: 85%;
     margin: auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #eee;
 }
 
 .bar {
@@ -60,40 +60,40 @@ body {
     margin-bottom: 20px;
     height: 500px;
     padding: 10px;
-    background-color: #efefef;
+    background-color: #ddd;
     border-radius: 5px;
-    box-shadow: 0px 3px 4px #CCCCCC;
+    box-shadow: 3px 3px 5px 6px #aaa;
 
 }
 
 .chart-history {
     margin-bottom: 20px;
     height: 380px;
-    padding: 4px 25px;
-    background-color: #efefef;
+    padding: 10px;
+    background-color: #ddd;
     border-radius: 5px;
-    box-shadow: 0px 3px 4px #CCCCCC;
+    box-shadow: 3px 3px 5px 6px #aaa;
+
 }
 
 h1 {
-    font-family: "Century Gothic";
-    text-shadow: 0 -1px 0 #0C3854;
+    font-family: "SansationBold","san-serif";
+    text-shadow: 0 1px 0 white;
     margin: 0;
-    color:#FFF;
 }
 
 h2 {
-    font-family: "Century Gothic";
-    text-shadow: 0 1px 0 #FFF;
-    color:#154868;
+    font-family: "SansationRegular","san-serif";
+    text-shadow: 0 1px 0 white;
 }
 
 #title {
-    background: url("chamilo-logo.png") no-repeat scroll 930px 32px #2E75A3;
-    margin: 6px 0px 28px;
-    padding: 12px 25px 25px;
+    margin: 20px 0 20px 0;
+    padding: 20px;
     height: 70px;
+    background-color: #ddd;
+    text-align: center;
     font-size: 2em;
     border-radius: 5px;
-    box-shadow: 0px 3px 4px #CCCCCC;
+    box-shadow: 3px 3px 5px 6px #aaa;
 }

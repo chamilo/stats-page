@@ -1,8 +1,8 @@
 /*rules for the plot target div.  These will be cascaded down to all plot elements according to css rules*/
 .jqplot-target {
     position: relative;
-    color: #154868;
-    font-family: 'Century Gothic',verdana,arial,helvetica,sans-serif;
+    color: #666666;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     font-size: 1em;
 /*    height: 300px;
     width: 400px;*/
