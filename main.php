@@ -111,7 +111,7 @@ function retrievedata() {
         list($from, $to) = preg_split('/-/', $range);
         $sql = "SELECT '".$range."' AS myrange, COUNT(*) as N FROM " . DEFDB . ".resume WHERE number_of_users >= $from AND number_of_users <= $to;";
         $result = $mydb->query($sql);
-        $num = $result->num_rows();
+        $num = $result->num_rows;
         if ($num == 0) {
             $row = array($range, 0);
         } else {
