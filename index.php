@@ -45,6 +45,12 @@
     <div id="history-users"></div>
 </div>
 
+<div id="Chart6" class="chart-history">
+    <h2>Range of users per portal</h2>
+
+    <div id="range-users"></div>
+</div>
+
 <div id="Chart1" class="chart-section">
     <h2>Installation per version</h2>
 
@@ -105,6 +111,10 @@
         var data6 = [<?php echo chart(6, 'values');?>];
         var ticks6 = [<?php echo chart(6, 'ticks');?>];
         cshbarplot('history-users', data6, ticks6, 'Users', '#C5B47F');
+        //Ranges of users
+        var data7 = [<?php echo chart(6, 'values');?>];
+        var ticks7 = [<?php echo chart(6, 'ticks');?>];
+        cshbarplot('range-users', data7, ticks7, 'Ranges', '#C5B47F');
     </script>
 </footer>
 </html>

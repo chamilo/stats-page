@@ -95,6 +95,17 @@ function retrievedata() {
         $table[6][] = $row;
     }
 
+    /* Ranges of number of users per portal*/
+
+    //$sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numusers) as N FROM " . DEFDB . ".history GROUP BY fecha;";
+    $ranges = preg_split('/,/', CHA_USERS_RANGES);
+    foreach ($ranges as $range) {
+        list($from, $to) = preg_split('/-/', $range);
+        $sql = "SELECT '".$range."' AS range, COUNT(*) as N FROM " . DEFDB . ".resume WHERE number_of_users >= $from AND number_of_users <= $to;";
+        $result = $mydb->query($sql);
+        $row = $result->fetch_assoc();
+        $table[7][] = $row;
+    }
 
     $result->close();
     $mydb->close();
@@ -130,6 +141,10 @@ function chart($num = 0, $op = 'values')
         case 6:
             $etiqueta = "fecha";
             $dato = "N";
+            break;
+        case 7:
+            $etiqueta = 'range';
+            $dato = 'N';
             break;
     }
 
