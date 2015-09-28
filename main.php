@@ -109,7 +109,7 @@ function retrievedata() {
     $ranges = preg_split('/,/', CHA_USERS_RANGES);
     foreach ($ranges as $range) {
         list($from, $to) = preg_split('/-/', $range);
-        $sql = "SELECT '".$range."' AS range, COUNT(*) as N FROM " . DEFDB . ".resume WHERE number_of_users >= $from AND number_of_users <= $to;";
+        $sql = "SELECT '".$range."' AS myrange, COUNT(*) as N FROM " . DEFDB . ".resume WHERE number_of_users >= $from AND number_of_users <= $to;";
         $result = $mydb->query($sql);
         $row = $result->fetch_assoc();
         $table[8][] = $row;
@@ -152,7 +152,7 @@ function chart($num = 0, $op = 'values')
             $dato = "N";
             break;
         case 8:
-            $etiqueta = "range";
+            $etiqueta = "myrange";
             $dato = "N";
             break;
     }
