@@ -95,6 +95,14 @@ function retrievedata() {
         $table[6][] = $row;
     }
 
+    /* Number of sessions per month since 2010*/
+
+    $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numsessions) as N FROM " . DEFDB . ".history GROUP BY fecha;";
+    $result = $mydb->query($sql);
+    while ($row = $result->fetch_assoc()) {
+        $table[7][] = $row;
+    }
+
     /* Ranges of number of users per portal*/
 
     //$sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numusers) as N FROM " . DEFDB . ".history GROUP BY fecha;";
@@ -104,7 +112,7 @@ function retrievedata() {
         $sql = "SELECT '".$range."' AS range, COUNT(*) as N FROM " . DEFDB . ".resume WHERE number_of_users >= $from AND number_of_users <= $to;";
         $result = $mydb->query($sql);
         $row = $result->fetch_assoc();
-        $table[7][] = $row;
+        $table[8][] = $row;
     }
 
     $result->close();
@@ -139,12 +147,13 @@ function chart($num = 0, $op = 'values')
         case 4:
         case 5:
         case 6:
+        case 7:
             $etiqueta = "fecha";
             $dato = "N";
             break;
-        case 7:
-            $etiqueta = 'range';
-            $dato = 'N';
+        case 8:
+            $etiqueta = "range";
+            $dato = "N";
             break;
     }
 

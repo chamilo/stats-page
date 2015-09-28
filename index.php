@@ -27,30 +27,42 @@
 <div id="title">
     <h1>Chamilo Stats</h1>
 </div>
+<a name="history-portal" />
 <div id="Chart4" class="chart-history">
-    <h2>History of Portals Installation</h2>
+    <h2>History of Portals Installation (*)</h2>
 
     <div id="history-portal"></div>
 </div>
 
+<a name="history-courses" />
 <div id="Chart5" class="chart-history">
-    <h2>History of Course creation</h2>
+    <h2>History of Course creation (*)</h2>
 
     <div id="history-courses"></div>
 </div>
 
+<a name="history-users" />
 <div id="Chart6" class="chart-history">
-    <h2>History of Users in portals</h2>
+    <h2>History of Users in portals (*)</h2>
 
     <div id="history-users"></div>
 </div>
 
-<div id="Chart6" class="chart-history">
+<a name="history-sessions" />
+<div id="Chart7" class="chart-history">
+    <h2>History of Sessions in portals (*)</h2>
+
+    <div id="history-sessions"></div>
+</div>
+<h4>(*) Last 18 months.</h4>
+
+<div id="Chart8" class="chart-history">
     <h2>Range of users per portal</h2>
 
     <div id="range-users"></div>
 </div>
 
+<a name="chart-install" />
 <div id="Chart1" class="chart-section">
     <h2>Installation per version</h2>
 
@@ -59,6 +71,7 @@
     <div id="chart-pie1" class="pie" style="height: 400px; width: 400px"></div>
 
 </div>
+<a name="chart-courses" />
 <div id="Chart2" class="chart-section">
     <h2>Courses per version</h2>
 
@@ -66,6 +79,7 @@
 
     <div id="chart-pie2" class="pie" style="height: 400px; width: 400px"></div>
 </div>
+<a name="chart-users" />
 <div id="Chart3" class="chart-section">
     <h2>Users per version</h2>
 
@@ -102,19 +116,23 @@
         //History portals
         var data4 = [<?php echo chart(4, 'values');?>];
         var ticks4 = [<?php echo chart(4, 'ticks');?>];
-        cshbarplot('history-portal', data4, ticks4, 'Portals', '#4BB2C5');
+        cshbarplot('history-portal', data4.splice(data4.length-18,18),ticks4.splice(ticks4.length-18,18), 'Portals', '#4BB2C5');
         //History courses
         var data5 = [<?php echo chart(5, 'values');?>];
         var ticks5 = [<?php echo chart(5, 'ticks');?>];
-        cshbarplot('history-courses', data5, ticks5, 'Courses', '#839557');
+        cshbarplot('history-courses', data5.splice(data5.length-18,18),ticks5.splice(ticks5.length-18,18), 'Courses', '#839557');
         //History users
         var data6 = [<?php echo chart(6, 'values');?>];
         var ticks6 = [<?php echo chart(6, 'ticks');?>];
-        cshbarplot('history-users', data6, ticks6, 'Users', '#C5B47F');
+        cshbarplot('history-users', data6.splice(data6.length-18,18),ticks6.splice(ticks6.length-18,18), 'Users', '#C5B47F');
+        //History sessions
+        var data7 = [<?php echo chart(7, 'values');?>];
+        var ticks7 = [<?php echo chart(7, 'ticks');?>];
+        cshbarplot('history-sessions', data7.splice(data7.length-18,18),ticks7.splice(ticks7.length-18,18), 'Sessions', '#C5542F');
         //Ranges of users
-        var data7 = [<?php echo chart(6, 'values');?>];
-        var ticks7 = [<?php echo chart(6, 'ticks');?>];
-        cshbarplot('range-users', data7, ticks7, 'Ranges', '#C5B47F');
+        var data7 = [<?php echo chart(8, 'values');?>];
+        var ticks7 = [<?php echo chart(8, 'ticks');?>];
+        cshbarplot('range-users', data8, ticks8, 'Ranges', '#C5B47F');
     </script>
 </footer>
 </html>
