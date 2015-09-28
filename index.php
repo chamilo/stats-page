@@ -130,9 +130,9 @@
         var ticks7 = [<?php echo chart(7, 'ticks');?>];
         cshbarplot('history-sessions', data7.splice(data7.length-18,18),ticks7.splice(ticks7.length-18,18), 'Sessions', '#C5542F');
         //Ranges of users
-        var data7 = [<?php echo chart(8, 'values');?>];
-        var ticks7 = [<?php echo chart(8, 'ticks');?>];
-        cshbarplot('range-users', data8, ticks8, 'Ranges', '#C5B47F');
+        var data8 = [<?php echo chart(8, 'values');?>];
+        var ticks8 = [<?php echo chart(8, 'ticks');?>];
+        cshbarplot('range-users', data8.splice(data8.length-10,10),ticks8.splice(ticks8.length-10,10), 'Ranges', '#C5B47F');
     </script>
 </footer>
 </html>
