@@ -36,93 +36,103 @@ AND register.max_register = community.registered_on;
  */
 function retrievedata() {
 
-    $mydb = new mysqli(SERVER, DBUSER, DBPASSWORD, DEFDB);
+    if  ( htmlspecialchars($_GET["refresh"]) != "1" ) // use ?refresh=1 in URL to force read database again
+        $table = apc_fetch('chamilo_stats'); // Verify if $table exist in APC
+    else
+        apc_delete('chamilo_stats'); // delete cached $table for store with new data
 
-    /* Retrieve Installation per version */
-    // CHA_VERSIONS is defined in connection.php
-    $sql = "SELECT LEFT(portal_version,6) AS portal, COUNT( 'id' ) AS number FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (".CHA_VERSIONS.") ) ) ORDER BY LENGTH(portal), portal";
-    $result = $mydb->query($sql);
-    while ($row = $result->fetch_assoc()) {
-        $table[0][] = $row;
-    }
+    if( $table == NULL) {   // If not exist query the DB
 
-    /* Retrieve Courses per Version */
+        $mydb = new mysqli(SERVER, DBUSER, DBPASSWORD, DEFDB);
 
-    $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_courses ) AS numcourses FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (".CHA_VERSIONS.") ) ) ORDER BY LENGTH(portal),portal";
-    $result = $mydb->query($sql);
-    while ($row = $result->fetch_assoc()) {
-        $table[1][] = $row;
-    }
-
-
-    /* Retrieve Users per Version */
-
-    $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (".CHA_VERSIONS_NO_USERS.") ) ) ORDER BY LENGTH(portal),portal";
-    $result = $mydb->query($sql);
-    while ($row = $result->fetch_assoc()) {
-        $table[2][] = $row;
-    }
-
-    /* Retieve History per portals */
-
-    $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (".CHA_VERSIONS.") ) )";
-    $result = $mydb->query($sql);
-    while ($row = $result->fetch_assoc()) {
-        $table[3][] = $row;
-    }
-
-    /* Number of portals per month since 2010*/
-
-    $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numportals) as N FROM " . DEFDB . ".history GROUP BY fecha;";
-    $result = $mydb->query($sql);
-    while ($row = $result->fetch_assoc()) {
-        $table[4][] = $row;
-    }
-
-    /* Number of courses per month since 2010*/
-
-    $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numcourses) as N FROM " . DEFDB . ".history GROUP BY fecha;";
-    $result = $mydb->query($sql);
-    while ($row = $result->fetch_assoc()) {
-        $table[5][] = $row;
-    }
-
-    /* Number of users per month since 2010*/
-
-    $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numusers) as N FROM " . DEFDB . ".history GROUP BY fecha;";
-    $result = $mydb->query($sql);
-    while ($row = $result->fetch_assoc()) {
-        $table[6][] = $row;
-    }
-
-    /* Number of sessions per month since 2010*/
-
-    $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numsessions) as N FROM " . DEFDB . ".history GROUP BY fecha;";
-    $result = $mydb->query($sql);
-    while ($row = $result->fetch_assoc()) {
-        $table[7][] = $row;
-    }
-
-    /* Ranges of number of users per portal*/
-
-    //$sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numusers) as N FROM " . DEFDB . ".history GROUP BY fecha;";
-    $ranges = preg_split('/,/', CHA_USERS_RANGES);
-    foreach ($ranges as $range) {
-        list($from, $to) = preg_split('/-/', $range);
-        $sql = "SELECT '".$range."' AS myrange, COUNT(*) as N FROM " . DEFDB . ".resume WHERE number_of_users >= $from AND number_of_users <= $to;";
+        /* Retrieve Installation per version */
+        // CHA_VERSIONS is defined in connection.php
+        $sql = "SELECT LEFT(portal_version,6) AS portal, COUNT( 'id' ) AS number FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (" . CHA_VERSIONS . ") ) ) ORDER BY LENGTH(portal), portal";
         $result = $mydb->query($sql);
-        $num = $result->num_rows;
-        if ($num == 0) {
-            $row = array($range, 0);
-        } else {
-            $row = $result->fetch_assoc();
+        while ($row = $result->fetch_assoc()) {
+            $table[0][] = $row;
         }
-        $table[8][] = $row;
+
+        /* Retrieve Courses per Version */
+
+        $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_courses ) AS numcourses FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (" . CHA_VERSIONS . ") ) ) ORDER BY LENGTH(portal),portal";
+        $result = $mydb->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $table[1][] = $row;
+        }
+
+
+        /* Retrieve Users per Version */
+
+        $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (" . CHA_VERSIONS_NO_USERS . ") ) ) ORDER BY LENGTH(portal),portal";
+        $result = $mydb->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $table[2][] = $row;
+        }
+
+        /* Retieve History per portals */
+
+        $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (" . CHA_VERSIONS . ") ) )";
+        $result = $mydb->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $table[3][] = $row;
+        }
+
+        /* Number of portals per month since 2010*/
+
+        $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numportals) as N FROM " . DEFDB . ".history GROUP BY fecha;";
+        $result = $mydb->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $table[4][] = $row;
+        }
+
+        /* Number of courses per month since 2010*/
+
+        $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numcourses) as N FROM " . DEFDB . ".history GROUP BY fecha;";
+        $result = $mydb->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $table[5][] = $row;
+        }
+
+        /* Number of users per month since 2010*/
+
+        $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numusers) as N FROM " . DEFDB . ".history GROUP BY fecha;";
+        $result = $mydb->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $table[6][] = $row;
+        }
+
+        /* Number of sessions per month since 2010*/
+
+        $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numsessions) as N FROM " . DEFDB . ".history GROUP BY fecha;";
+        $result = $mydb->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $table[7][] = $row;
+        }
+
+        /* Ranges of number of users per portal*/
+
+        //$sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numusers) as N FROM " . DEFDB . ".history GROUP BY fecha;";
+        $ranges = preg_split('/,/', CHA_USERS_RANGES);
+        foreach ($ranges as $range) {
+            list($from, $to) = preg_split('/-/', $range);
+            $sql = "SELECT '" . $range . "' AS myrange, COUNT(*) as N FROM " . DEFDB . ".resume WHERE number_of_users >= $from AND number_of_users <= $to;";
+            $result = $mydb->query($sql);
+            $num = $result->num_rows;
+            if ($num == 0) {
+                $row = array($range, 0);
+            }
+            else {
+                $row = $result->fetch_assoc();
+            }
+            $table[8][] = $row;
+        }
+
+        $mydb->close();
+
+    apc_add('chamilo_stats', $table, 86400);  // Store results for 1 day
+
     }
-
-    $result->close();
-    $mydb->close();
-
     return $table;
 }
 /**
@@ -163,6 +173,7 @@ function chart($num = 0, $op = 'values')
     }
 
     $resultado = retrievedata();
+
     $keys = array_keys($resultado[0]);
     foreach ($resultado[$num] as $value) {
         switch ($op) {
