@@ -36,11 +36,6 @@ AND register.max_register = community.registered_on;
  */
 function retrievedata() {
 
-    if  ( htmlspecialchars($_GET["refresh"]) != "1" ) // use ?refresh=1 in URL to force read database again
-        $table = apc_fetch('chamilo_stats'); // Verify if $table exist in APC
-    else
-        apc_delete('chamilo_stats'); // delete cached $table for store with new data
-
     if( $table == NULL) {   // If not exist query the DB
 
         $dsn = 'mysql:dbname='.DEFDB.';host='.SERVER;
@@ -133,8 +128,6 @@ function retrievedata() {
         }
 
         //$mydb->close();
-
-        apc_add('chamilo_stats', $table, 86400);  // Store results for 1 day
 
     }
     return $table;
