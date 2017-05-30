@@ -43,13 +43,17 @@ function retrievedata() {
 
     if( $table == NULL) {   // If not exist query the DB
 
-        $mydb = new mysqli(SERVER, DBUSER, DBPASSWORD, DEFDB);
+        $dsn = 'mysql:dbname='.DEFDB.';host='.SERVER;
+        $mydb = new PDO($dsn, DBUSER, DBPASSWORD);
+        if ($mydb=== false) {exit;}
+
+        //$mydb = new mysqli(SERVER, DBUSER, DBPASSWORD, DEFDB);
 
         /* Retrieve Installation per version */
         // CHA_VERSIONS is defined in connection.php
         $sql = "SELECT LEFT(portal_version,6) AS portal, COUNT( 'id' ) AS number FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (" . CHA_VERSIONS . ") ) ) ORDER BY LENGTH(portal), portal";
         $result = $mydb->query($sql);
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch()) {
             $table[0][] = $row;
         }
 
@@ -57,7 +61,7 @@ function retrievedata() {
 
         $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_courses ) AS numcourses FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (" . CHA_VERSIONS . ") ) ) ORDER BY LENGTH(portal),portal";
         $result = $mydb->query($sql);
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch()) {
             $table[1][] = $row;
         }
 
@@ -66,7 +70,7 @@ function retrievedata() {
 
         $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (" . CHA_VERSIONS_NO_USERS . ") ) ) ORDER BY LENGTH(portal),portal";
         $result = $mydb->query($sql);
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch()) {
             $table[2][] = $row;
         }
 
@@ -74,7 +78,7 @@ function retrievedata() {
 
         $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (" . CHA_VERSIONS . ") ) )";
         $result = $mydb->query($sql);
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch()) {
             $table[3][] = $row;
         }
 
@@ -82,7 +86,7 @@ function retrievedata() {
 
         $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numportals) as N FROM " . DEFDB . ".history GROUP BY fecha;";
         $result = $mydb->query($sql);
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch()) {
             $table[4][] = $row;
         }
 
@@ -90,7 +94,7 @@ function retrievedata() {
 
         $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numcourses) as N FROM " . DEFDB . ".history GROUP BY fecha;";
         $result = $mydb->query($sql);
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch()) {
             $table[5][] = $row;
         }
 
@@ -98,7 +102,7 @@ function retrievedata() {
 
         $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numusers) as N FROM " . DEFDB . ".history GROUP BY fecha;";
         $result = $mydb->query($sql);
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch()) {
             $table[6][] = $row;
         }
 
@@ -106,7 +110,7 @@ function retrievedata() {
 
         $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numsessions) as N FROM " . DEFDB . ".history GROUP BY fecha;";
         $result = $mydb->query($sql);
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch()) {
             $table[7][] = $row;
         }
 
@@ -118,19 +122,19 @@ function retrievedata() {
             list($from, $to) = preg_split('/-/', $range);
             $sql = "SELECT '" . $range . "' AS myrange, COUNT(*) as N FROM " . DEFDB . ".resume WHERE number_of_users >= $from AND number_of_users <= $to;";
             $result = $mydb->query($sql);
-            $num = $result->num_rows;
+            $num = $result->rowCount();
             if ($num == 0) {
                 $row = array($range, 0);
             }
             else {
-                $row = $result->fetch_assoc();
+                $row = $result->fetch();
             }
             $table[8][] = $row;
         }
 
-        $mydb->close();
+        //$mydb->close();
 
-    apc_add('chamilo_stats', $table, 86400);  // Store results for 1 day
+        apc_add('chamilo_stats', $table, 86400);  // Store results for 1 day
 
     }
     return $table;
