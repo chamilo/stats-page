@@ -1,12 +1,13 @@
 <?php
 /**
- * This script generates graphics for the Chamilo user stats, as shown on 
- * http://version.chamilo.org/community.php
+ * This script generates data for graphics on the Chamilo stats page, as shown on
+ * http://version.chamilo.org/stats/
  * @package chamilo.website.stats
- * @author Alberto Torreblanca
+ * @author Alberto Torreblanca <alberto@chamilo.org>
+ * @author Yannick Warnier <yannick@chamilo.org>
  */
 /**
- * Includes
+ * Includes the database and versions settings
  */
 include_once('connection.php');
 /**
@@ -14,121 +15,201 @@ include_once('connection.php');
  */
 /* Retrieve DATA */
 /* Retrieve Installation per version */
+$dsn = 'mysql:dbname='.DEFDB.';host='.SERVER;
+try {
+    $myDB = new PDO($dsn, DBUSER, DBPASSWORD);
+} catch (PDOException $e) {
+    die('Could not connect to the database');
+}
+// Before anything, collect an array of all the portals in their latest version
+$ids = '';
+$sql = "SELECT portal_url, max(id) as pid 
+        FROM community 
+        WHERE portal_version IN (".CHA_VERSIONS.")
+        GROUP BY portal_url
+        ";
+$result = $myDB->query($sql);
+while ($row = $result->fetch()) {
+    $ids .= $row['pid'].',';
+}
+$ids = substr($ids, 0, -1);
 
-/* Crate the VIEWS in the database ...
+// Prepare an ordered list of versions
+$versions = str_replace("'", '', CHA_VERSIONS);
+$versions = preg_split('/,/', $versions);
 
-** This views are for per version statistics **
-
-CREATE VIEW register AS SELECT portal_ip AS portal_ip, portal_url AS portal_url, MAX(registered_on) AS max_register FROM community GROUP BY portal_ip, portal_url;
-CREATE VIEW resume AS
-SELECT community.portal_ip, community.portal_url, community.portal_version, community.number_of_courses, community.number_of_users
-FROM register, association.community AS community
-WHERE register.portal_ip = community.portal_ip
-AND register.portal_url = community.portal_url
-AND register.max_register = community.registered_on;
-
-** This views are for historical growth **
-
-*/
 /**
  * Retrieves the data from the database and return it as a table
+ * @param int $type Type of data we want
  * @return array Table of results
  */
-function retrievedata() {
+function retrieveData($type) {
+    global $myDB, $ids, $versions;
+    $table = [];
 
-    if( $table == NULL) {   // If not exist query the DB
-
-        $dsn = 'mysql:dbname='.DEFDB.';host='.SERVER;
-        $mydb = new PDO($dsn, DBUSER, DBPASSWORD);
-        if ($mydb=== false) {exit;}
-
-        //$mydb = new mysqli(SERVER, DBUSER, DBPASSWORD, DEFDB);
-
-        /* Retrieve Installation per version */
-        // CHA_VERSIONS is defined in connection.php
-        $sql = "SELECT LEFT(portal_version,6) AS portal, COUNT( 'id' ) AS number FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (" . CHA_VERSIONS . ") ) ) ORDER BY LENGTH(portal), portal";
-        $result = $mydb->query($sql);
-        while ($row = $result->fetch()) {
-            $table[0][] = $row;
-        }
-
-        /* Retrieve Courses per Version */
-
-        $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_courses ) AS numcourses FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (" . CHA_VERSIONS . ") ) ) ORDER BY LENGTH(portal),portal";
-        $result = $mydb->query($sql);
-        while ($row = $result->fetch()) {
-            $table[1][] = $row;
-        }
-
-
-        /* Retrieve Users per Version */
-
-        $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (" . CHA_VERSIONS_NO_USERS . ") ) ) ORDER BY LENGTH(portal),portal";
-        $result = $mydb->query($sql);
-        while ($row = $result->fetch()) {
-            $table[2][] = $row;
-        }
-
-        /* Retieve History per portals */
-
-        $sql = "SELECT LEFT(portal_version,6) AS portal, SUM( number_of_users ) AS numusers FROM " . DEFDB . ".resume AS resume GROUP BY portal HAVING ( ( portal IN (" . CHA_VERSIONS . ") ) )";
-        $result = $mydb->query($sql);
-        while ($row = $result->fetch()) {
-            $table[3][] = $row;
-        }
-
-        /* Number of portals per month since 2010*/
-
-        $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numportals) as N FROM " . DEFDB . ".history GROUP BY fecha;";
-        $result = $mydb->query($sql);
-        while ($row = $result->fetch()) {
-            $table[4][] = $row;
-        }
-
-        /* Number of courses per month since 2010*/
-
-        $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numcourses) as N FROM " . DEFDB . ".history GROUP BY fecha;";
-        $result = $mydb->query($sql);
-        while ($row = $result->fetch()) {
-            $table[5][] = $row;
-        }
-
-        /* Number of users per month since 2010*/
-
-        $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numusers) as N FROM " . DEFDB . ".history GROUP BY fecha;";
-        $result = $mydb->query($sql);
-        while ($row = $result->fetch()) {
-            $table[6][] = $row;
-        }
-
-        /* Number of sessions per month since 2010*/
-
-        $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numsessions) as N FROM " . DEFDB . ".history GROUP BY fecha;";
-        $result = $mydb->query($sql);
-        while ($row = $result->fetch()) {
-            $table[7][] = $row;
-        }
-
-        /* Ranges of number of users per portal*/
-
-        //$sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha, MAX(numusers) as N FROM " . DEFDB . ".history GROUP BY fecha;";
-        $ranges = preg_split('/,/', CHA_USERS_RANGES);
-        foreach ($ranges as $range) {
-            list($from, $to) = preg_split('/-/', $range);
-            $sql = "SELECT '" . $range . "' AS myrange, COUNT(*) as N FROM " . DEFDB . ".resume WHERE number_of_users >= $from AND number_of_users <= $to;";
-            $result = $mydb->query($sql);
-            $num = $result->rowCount();
-            if ($num == 0) {
-                $row = array($range, 0);
+    switch ($type) {
+        case 0:
+            /* Retrieve number of installations per version */
+            $sql = "SELECT portal_version as portal,
+                        COUNT(portal_url) AS number
+                        FROM community
+                        WHERE id IN ($ids)
+                        GROUP BY portal
+                    ";
+            $result = $myDB->query($sql);
+            $temp = [];
+            while ($row = $result->fetch()) {
+                $temp[$row['portal']] = $row;
             }
-            else {
-                $row = $result->fetch();
+            foreach ($versions as $version) {
+                if (!empty($temp[$version])) {
+                    $table[] = $temp[$version];
+                }
             }
-            $table[8][] = $row;
-        }
+            break;
 
-        //$mydb->close();
+        case 1:
+            /* Retrieve Courses per Version */
+            /*
+            $sql = "SELECT LEFT(portal_version,6) AS portal,
+                      SUM( number_of_courses ) AS numcourses 
+                      FROM resume 
+                      GROUP BY portal 
+                      HAVING ( ( portal IN (".CHA_VERSIONS.") ) )
+                      ";
+            */
+            $sql = "SELECT portal_version as portal,
+                        SUM(number_of_courses) AS numcourses
+                        FROM community
+                        WHERE id IN ($ids)
+                        GROUP BY portal
+                    ";
+            $result = $myDB->query($sql);
+            $temp = [];
+            while ($row = $result->fetch()) {
+                $temp[$row['portal']] = $row;
+            }
+            foreach ($versions as $version) {
+                if (!empty($temp[$version])) {
+                    $table[] = $temp[$version];
+                }
+            }
+            break;
 
+        case 2:
+            /* Retrieve Users per Version */
+            // this should use the CHA_NO_USERS constant, but not really important for now
+            $sql = "SELECT portal_version as portal,
+                        SUM(number_of_users) AS numusers
+                        FROM community
+                        WHERE id IN ($ids)
+                        GROUP BY portal
+                    ";
+            $result = $myDB->query($sql);
+            $temp = [];
+            while ($row = $result->fetch()) {
+                $temp[$row['portal']] = $row;
+            }
+            foreach ($versions as $version) {
+                if (!empty($temp[$version])) {
+                    $table[] = $temp[$version];
+                }
+            }
+            break;
+
+        case 3:
+            /* Retrieve History per portals */
+            $sql = "SELECT portal_version as portal,
+                        SUM(number_of_users) AS numusers
+                        FROM community
+                        WHERE id IN ($ids)
+                        GROUP BY portal
+                    ";
+            $result = $myDB->query($sql);
+            $temp = [];
+            while ($row = $result->fetch()) {
+                $temp[$row['portal']] = $row;
+            }
+            foreach ($versions as $version) {
+                if (!empty($temp[$version])) {
+                    $table[] = $temp[$version];
+                }
+            }
+            break;
+
+        case 4:
+            /* Number of portals per month since 2010*/
+            $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha,
+                      MAX(numportals) as N 
+                      FROM history
+                      GROUP BY fecha
+                    ";
+            $result = $myDB->query($sql);
+            while ($row = $result->fetch()) {
+                $table[] = $row;
+            }
+            break;
+
+        case 5:
+            /* Number of courses per month since 2010*/
+            $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha,
+                      MAX(numcourses) as N
+                      FROM history GROUP BY fecha
+                      ";
+            $result = $myDB->query($sql);
+            while ($row = $result->fetch()) {
+                $table[] = $row;
+            }
+            break;
+
+        case 6:
+            /* Number of users per month since 2010*/
+            $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha,
+                      MAX(numusers) as N
+                      FROM history
+                      GROUP BY fecha
+                      ";
+            $result = $myDB->query($sql);
+            while ($row = $result->fetch()) {
+                $table[] = $row;
+            }
+            break;
+
+        case 7:
+            /* Number of sessions per month since 2010*/
+            $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha,
+                      MAX(numsessions) as N 
+                      FROM history
+                      GROUP BY fecha
+                      ";
+            $result = $myDB->query($sql);
+            while ($row = $result->fetch()) {
+                $table[] = $row;
+            }
+            break;
+
+        case 8:
+            /* Ranges of number of users per portal*/
+            $ranges = preg_split('/,/', CHA_USERS_RANGES);
+            foreach ($ranges as $range) {
+                list($from, $to) = preg_split('/-/', $range);
+                $sql = "SELECT '$range' AS myrange, 
+                          COUNT(*) as N
+                          FROM community
+                          WHERE id IN ($ids)
+                            AND number_of_users >= $from
+                            AND number_of_users <= $to
+                        ";
+                $result = $myDB->query($sql);
+                $num = $result->rowCount();
+                if ($num == 0) {
+                    $row = array($range, 0);
+                } else {
+                    $row = $result->fetch();
+                }
+                $table[] = $row;
+            }
+            break;
     }
     return $table;
 }
@@ -169,10 +250,10 @@ function chart($num = 0, $op = 'values')
             break;
     }
 
-    $resultado = retrievedata();
+    // @todo This function is still called 2 or 3 times per chart. Reduce that!
+    $table = retrieveData($num);
 
-    $keys = array_keys($resultado[0]);
-    foreach ($resultado[$num] as $value) {
+    foreach ($table as $value) {
         switch ($op) {
             case "values":
                 $chart1 .= $value[$dato] . ",";
@@ -185,6 +266,7 @@ function chart($num = 0, $op = 'values')
                 break;
         }
     }
+    $chart1 = substr($chart1, 0, -1);
     return rtrim($chart1, ',');
 
 }
