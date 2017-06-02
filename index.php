@@ -2,7 +2,7 @@
 <!-- HTML5 Document -->
 <html>
 <meta charset="utf-8">
-<title>Chamilo statistics Page</title>
+<title>Chamilo statistics page</title>
 <head>
     <link rel="stylesheet" href="css/jquery.jqplot.css">
     <link rel="stylesheet" href="css/style.css">
@@ -36,7 +36,7 @@
 
 <a name="history-courses" />
 <div id="Chart5" class="chart-history">
-    <h2>History of Course creation (*)</h2>
+    <h2>History of Courses creation (*)</h2>
 
     <div id="history-courses"></div>
 </div>
