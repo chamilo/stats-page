@@ -261,7 +261,7 @@ function chart($num = 0, $op = 'values')
             $table = apcu_fetch($apcuVar);
         } else {
             $table = retrieveData($num);
-            apcu_store($apcuVar, $table);
+            apcu_store($apcuVar, $table, 300);
         }
     } else {
         $table = retrieveData($num);
