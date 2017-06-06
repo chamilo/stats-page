@@ -250,8 +250,22 @@ function chart($num = 0, $op = 'values')
             break;
     }
 
+    $apcu = false;
+    $apcuVar = 'statschamiloorg_retrieve_'.$num;
+    if (function_exists('apcu_fetch')) {
+        $apcu = true;
+    }
     // @todo This function is still called 2 or 3 times per chart. Reduce that!
-    $table = retrieveData($num);
+    if ($apcu) {
+        if (apcu_exists($apcuVar) && (empty($_GET['r']))) {
+            $table = apcu_fetch($apcuVar);
+        } else {
+            $table = retrieveData($num);
+            apcu_store($apcuVar, $table);
+        }
+    } else {
+        $table = retrieveData($num);
+    }
 
     foreach ($table as $value) {
         switch ($op) {
