@@ -258,10 +258,12 @@ function chart($num = 0, $op = 'values')
     // @todo This function is still called 2 or 3 times per chart. Reduce that!
     if ($apcu) {
         if (apcu_exists($apcuVar) && (empty($_GET['r']))) {
-            $table = apcu_fetch($apcuVar);
+            $serialized = apcu_fetch($apcuVar);
+            $table = unserialize($serialized);
         } else {
             $table = retrieveData($num);
-            apcu_store($apcuVar, $table, 300);
+            $serialized = serialize($table);
+            apcu_store($apcuVar, $serialized, 300);
         }
     } else {
         $table = retrieveData($num);
