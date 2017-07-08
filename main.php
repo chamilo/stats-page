@@ -210,6 +210,23 @@ function retrieveData($type) {
                 $table[] = $row;
             }
             break;
+
+        case 9: 
+            // Select only "relevant" portals with more than 65 users (demo set is = 60)
+            $twoYears = time()-(86400*365*2);
+            $twoYearsAgo = date('Y-m-d', $twoYears);
+            $sql = "SELECT distinct(language) AS language, count(id) as N
+                FROM community
+                WHERE language in (".CHA_LANGUAGES.")
+                AND number_of_users > 65
+                AND updated_on > '$twoYearsAgo'
+                GROUP BY language order by 2 DESC LIMIT 20";
+            $result = $myDB->query($sql);
+            $num = $result->rowCount();
+            while ($row = $result->fetch()) {
+                $table[] = $row;
+            }
+            break;
     }
     return $table;
 }
@@ -248,6 +265,11 @@ function chart($num = 0, $op = 'values')
             $etiqueta = "myrange";
             $dato = "N";
             break;
+        case 9:
+            $etiqueta = "language";
+            $dato = "N";
+            break;
+
     }
 
     $apcu = false;

@@ -54,13 +54,20 @@
 
     <div id="history-sessions"></div>
 </div>
-<h4>(*) Last 18 months.</h4>
+<h4>(*) Last 24 months.</h4>
 
 <div id="Chart8" class="chart-history">
     <h2>Range of users per portal</h2>
 
     <div id="range-users"></div>
 </div>
+
+<div id="Chart9" class="chart-history">
+    <h2>Top 20 default portal languages(**)</h2>
+
+    <div id="languages-use"></div>
+</div>
+<h4>(**) Only portals with more than 65 users updated over the last 24 months</h4>
 
 <a name="chart-install" />
 <div id="Chart1" class="chart-section">
@@ -133,6 +140,10 @@
         var data8 = [<?php echo chart(8, 'values');?>];
         var ticks8 = [<?php echo chart(8, 'ticks');?>];
         cshbarplot('range-users', data8.splice(data8.length-10,10),ticks8.splice(ticks8.length-10,10), 'Ranges', '#C5B47F');
+        //Use of languages
+        var data9 = [<?php echo chart(9, 'values');?>];
+        var ticks9 = [<?php echo chart(9, 'ticks');?>];
+        cshbarplot('languages-use', data9.splice(data9.length-20,20),ticks9.splice(ticks9.length-20,20), 'Languages', '#C5B47F');
     </script>
 </footer>
 </html>
