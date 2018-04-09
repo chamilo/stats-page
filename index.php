@@ -2,7 +2,7 @@
 <!-- HTML5 Document -->
 <html>
 <meta charset="utf-8">
-<title>Chamilo statistics page</title>
+<title>Official Chamilo statistics page</title>
 <head>
     <link rel="stylesheet" href="css/jquery.jqplot.css">
     <link rel="stylesheet" href="css/style.css">
@@ -24,46 +24,47 @@
     <script src="js/csgfx.js"></script>
 </head>
 <body>
+<?php $date = date('Y-m-d'); ?>
 <div id="title">
     <h1>Chamilo Stats</h1>
 </div>
 <a name="history-portal" />
 <div id="Chart4" class="chart-history">
-    <h2>History of Portals Installation (*)</h2>
+    <h2>Total Chamilo portals installed (cumulative, by month) [<?php echo $date;?>]</h2>
 
     <div id="history-portal"></div>
 </div>
 
 <a name="history-courses" />
 <div id="Chart5" class="chart-history">
-    <h2>History of Courses creation (*)</h2>
+    <h2>Total Chamilo courses created (cumulative, by month) [<?php echo $date;?>]</h2>
 
     <div id="history-courses"></div>
 </div>
 
 <a name="history-users" />
 <div id="Chart6" class="chart-history">
-    <h2>History of Users in portals (*)</h2>
+    <h2>Total Chamilo user accounts created (cumulative, by month) [<?php echo $date;?>]</h2>
 
     <div id="history-users"></div>
 </div>
 
 <a name="history-sessions" />
 <div id="Chart7" class="chart-history">
-    <h2>History of Sessions in portals (*)</h2>
+    <h2>Total Chamilo course-sessions created (cumulative, by month) [<?php echo $date;?>]</h2>
 
     <div id="history-sessions"></div>
 </div>
-<h4>(*) Last 24 months.</h4>
+<h4>(*) Last 24 months. Months between 2017-09 and 2018-03 had a logic issue, fixed at the end of 2018-03.</h4>
 
 <div id="Chart8" class="chart-history">
-    <h2>Range of users per portal</h2>
+    <h2>Ranges of portal sizes (in users) [<?php echo $date;?>]</h2>
 
     <div id="range-users"></div>
 </div>
 
 <div id="Chart9" class="chart-history">
-    <h2>Top 20 default portal languages(**)</h2>
+    <h2>Top 20 default portal languages(**) [<?php echo $date;?>]</h2>
 
     <div id="languages-use"></div>
 </div>
@@ -71,7 +72,7 @@
 
 <a name="chart-install" />
 <div id="Chart1" class="chart-section">
-    <h2>Installation per version</h2>
+    <h2>Versions installed [<?php echo $date;?>]</h2>
 
     <div id="chart-install" class="bar" style="height: 400px; width: 600px"></div>
 
@@ -80,7 +81,7 @@
 </div>
 <a name="chart-courses" />
 <div id="Chart2" class="chart-section">
-    <h2>Courses per version</h2>
+    <h2>Courses created per Chamilo version [<?php echo $date;?>]</h2>
 
     <div id="chart-courses" class="bar" style="height: 400px; width: 600px"></div>
 
@@ -88,7 +89,7 @@
 </div>
 <a name="chart-users" />
 <div id="Chart3" class="chart-section">
-    <h2>Users per version</h2>
+    <h2>Users created per Chamilo version [<?php echo $date;?>]</h2>
 
     <div id="chart-users" class="bar" style="height: 400px; width: 600px"></div>
 
