@@ -35,18 +35,18 @@
     <div id="history-portal"></div>
 </div>
 
-<a name="history-courses" />
-<div id="Chart5" class="chart-history">
-    <h2>Total Chamilo courses created (cumulative, by month) [<?php echo $date;?>]</h2>
-
-    <div id="history-courses"></div>
-</div>
-
 <a name="history-users" />
 <div id="Chart6" class="chart-history">
     <h2>Total Chamilo user accounts created (cumulative, by month) [<?php echo $date;?>]</h2>
 
     <div id="history-users"></div>
+</div>
+
+<a name="history-courses" />
+<div id="Chart5" class="chart-history">
+    <h2>Total Chamilo courses created (cumulative, by month) [<?php echo $date;?>]</h2>
+
+    <div id="history-courses"></div>
 </div>
 
 <a name="history-sessions" />
