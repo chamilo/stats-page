@@ -31,4 +31,4 @@ if ($resb->rowCount() > 0) {
         $totalUsers += $row['number_of_users'];
     }
 }
-echo $totalUsers;
+echo json_encode(['count' => $totalUsers]);
