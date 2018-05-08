@@ -28,7 +28,7 @@ $resb = $db->query($sqlb);
 
 if ($resb->rowCount() > 0) {
     while ($row = $resb->fetch(PDO::FETCH_ASSOC)) {
-        $total_users += $row['number_of_users'];
+        $totalUsers += $row['number_of_users'];
     }
 }
-echo $total_users;
+echo $totalUsers;
