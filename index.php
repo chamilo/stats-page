@@ -55,7 +55,7 @@
 
     <div id="history-sessions"></div>
 </div>
-<h4>(*) Last 25 months. Months between 2017-09 and 2018-03 had a logic issue, fixed at the end of 2018-03.</h4>
+<h4>(*) Last 26 months. Months between 2017-09 and 2018-03 had a logic issue, fixed at the end of 2018-03.</h4>
 
 <div id="Chart8" class="chart-history">
     <h2>Ranges of portal sizes (in users) [<?php echo $date;?>]</h2>
@@ -68,7 +68,7 @@
 
     <div id="languages-use"></div>
 </div>
-<h4>(**) Only portals with more than 65 users updated over the last 25 months</h4>
+<h4>(**) Only portals with more than 65 users updated over the last 26 months</h4>
 
 <a name="chart-install" />
 <div id="Chart1" class="chart-section">
@@ -124,19 +124,19 @@
         //History portals
         var data4 = [<?php echo chart(4, 'values');?>];
         var ticks4 = [<?php echo chart(4, 'ticks');?>];
-        cshbarplot('history-portal', data4.splice(data4.length-25,25),ticks4.splice(ticks4.length-25,25), 'Portals', '#4BB2C5');
+        cshbarplot('history-portal', data4.splice(data4.length-26,26),ticks4.splice(ticks4.length-26,26), 'Portals', '#4BB2C5');
         //History courses
         var data5 = [<?php echo chart(5, 'values');?>];
         var ticks5 = [<?php echo chart(5, 'ticks');?>];
-        cshbarplot('history-courses', data5.splice(data5.length-25,25),ticks5.splice(ticks5.length-25,25), 'Courses', '#839557');
+        cshbarplot('history-courses', data5.splice(data5.length-26,26),ticks5.splice(ticks5.length-26,26), 'Courses', '#839557');
         //History users
         var data6 = [<?php echo chart(6, 'values');?>];
         var ticks6 = [<?php echo chart(6, 'ticks');?>];
-        cshbarplot('history-users', data6.splice(data6.length-25,25),ticks6.splice(ticks6.length-25,25), 'Users', '#C5B47F');
+        cshbarplot('history-users', data6.splice(data6.length-26,26),ticks6.splice(ticks6.length-26,26), 'Users', '#C5B47F');
         //History sessions
         var data7 = [<?php echo chart(7, 'values');?>];
         var ticks7 = [<?php echo chart(7, 'ticks');?>];
-        cshbarplot('history-sessions', data7.splice(data7.length-25,25),ticks7.splice(ticks7.length-25,25), 'Sessions', '#C5542F');
+        cshbarplot('history-sessions', data7.splice(data7.length-26,26),ticks7.splice(ticks7.length-26,26), 'Sessions', '#C5542F');
         //Ranges of users
         var data8 = [<?php echo chart(8, 'values');?>];
         var ticks8 = [<?php echo chart(8, 'ticks');?>];
