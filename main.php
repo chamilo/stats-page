@@ -227,6 +227,19 @@ function retrieveData($type) {
                 $table[] = $row;
             }
             break;
+        case 10:
+            // Select packagers vs number of portals in the last 2 years
+            $twoYears = time()-(86400*365*2);
+            $twoYearsAgo = date('Y-m-d', $twoYears);
+            $sql = "SELECT distinct(packager) AS packager, count(id) as N
+                FROM community
+                WHERE updated_on > '$twoYearsAgo'
+                GROUP BY packager ORDER BY 2 DESC LIMIT 20";
+            $result = $myDB->query($sql);
+            while ($row = $result->fetch()) {
+                $table[] = $row;
+            }
+            break;
     }
     return $table;
 }
@@ -269,7 +282,10 @@ function chart($num = 0, $op = 'values')
             $etiqueta = "language";
             $dato = "N";
             break;
-
+        case 10:
+            $etiqueta = "packager";
+            $dato = "N";
+            break;
     }
 
     $apcu = false;

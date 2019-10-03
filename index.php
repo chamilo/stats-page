@@ -95,6 +95,15 @@
 
     <div id="chart-pie3" class="pie" style="height: 400px; width: 400px"></div>
 </div>
+<!--a name="chart-packagers" />
+<div id="Chart10" class="chart-section">
+    <h2>Portals per packager [<?php echo $date;?>]</h2>
+
+    <div id="chart-packagers" class="bar" style="height: 400px; width: 600px"></div>
+
+    <div id="chart-pie10" class="pie" style="height: 400px; width: 400px"></div>
+</div-->
+
 </body>
 
 <footer>
@@ -145,6 +154,12 @@
         var data9 = [<?php echo chart(9, 'values');?>];
         var ticks9 = [<?php echo chart(9, 'ticks');?>];
         cshbarplot('languages-use', data9.splice(data9.length-20,20),ticks9.splice(ticks9.length-20,20), 'Languages', '#C5B47F');
+        // packagers
+        //var data10 = [<?php echo chart(10, 'values');?>];
+        //var ticks10 = [<?php echo chart(10, 'ticks');?>];
+        //csbarplot('chart-packagers', data10, ticks10);
+        //var pie10 = [<?php echo chart(10, 'pie');?>];
+        //cspieplot("chart-pie10", pie10);
     </script>
 </footer>
 </html>
