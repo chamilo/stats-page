@@ -240,6 +240,17 @@ function retrieveData($type) {
                 $table[] = $row;
             }
             break;
+        case 11:
+            // Select portals per year
+            $sql = "SELECT LEFT(log_time,4) AS fecha,
+                      MAX(numportals) as N 
+                      FROM history
+                      GROUP BY fecha
+                    ";
+            $result = $myDB->query($sql);
+            while ($row = $result->fetch()) {
+                $table[] = $row;
+            }
     }
     return $table;
 }
@@ -286,6 +297,9 @@ function chart($num = 0, $op = 'values')
             $etiqueta = "packager";
             $dato = "N";
             break;
+        case 11:
+            $etiqueta = 'fecha';
+            $dato = 'N';
     }
 
     $apcu = false;

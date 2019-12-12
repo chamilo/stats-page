@@ -103,6 +103,12 @@
 
     <div id="chart-pie10" class="pie" style="height: 400px; width: 400px"></div>
 </div-->
+<a name="history-portal-year" />
+<div id="Chart11" class="chart-portal-history">
+    <h2>Total Chamilo portals installed (cumulative, by year) [<?php echo $date;?>]</h2>
+
+    <div id="history-portal-year"></div>
+</div>
 
 </body>
 
@@ -160,6 +166,10 @@
         //csbarplot('chart-packagers', data10, ticks10);
         //var pie10 = [<?php echo chart(10, 'pie');?>];
         //cspieplot("chart-pie10", pie10);
+        //History portals
+        var data11 = [<?php echo chart(11, 'values');?>];
+        var ticks11 = [<?php echo chart(11, 'ticks');?>];
+        cshbarplot('history-portal-year', data11.splice(data11.length-26,26),ticks11.splice(ticks11.length-26,26), 'Portals per year', '#4BB2C5');
     </script>
 </footer>
 </html>
