@@ -251,6 +251,19 @@ function retrieveData($type) {
             while ($row = $result->fetch()) {
                 $table[] = $row;
             }
+            break;
+        case 12:
+            // Select users per year
+            $sql = "SELECT LEFT(log_time,4) AS fecha,
+                      MAX(numusers) as N
+                      FROM history
+                      GROUP BY fecha
+                    ";
+            $result = $myDB->query($sql);
+            while ($row = $result->fetch()) {
+                $table[] = $row;
+            }
+            break;
     }
     return $table;
 }
@@ -298,8 +311,10 @@ function chart($num = 0, $op = 'values')
             $dato = "N";
             break;
         case 11:
+        case 12:
             $etiqueta = 'fecha';
             $dato = 'N';
+            break;
     }
 
     $apcu = false;

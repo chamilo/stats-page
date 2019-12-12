@@ -110,6 +110,13 @@
     <div id="history-portal-year"></div>
 </div>
 
+<a name="history-user-year" />
+<div id="Chart12" class="chart-user-history">
+    <h2>Total Chamilo users installed (cumulative, by year) [<?php echo $date;?>]</h2>
+
+    <div id="history-user-year"></div>
+</div>
+
 </body>
 
 <footer>
@@ -139,7 +146,7 @@
         //History portals
         var data4 = [<?php echo chart(4, 'values');?>];
         var ticks4 = [<?php echo chart(4, 'ticks');?>];
-        cshbarplot('history-portal', data4.splice(data4.length-26,26),ticks4.splice(ticks4.length-26,26), 'Portals', '#4BB2C5');
+        cshbarplot('history-portal', data4.splice(data4.length-26,26),ticks4.splice(ticks4.length-26,26), 'Portals', '#C5B47F');
         //History courses
         var data5 = [<?php echo chart(5, 'values');?>];
         var ticks5 = [<?php echo chart(5, 'ticks');?>];
@@ -147,7 +154,7 @@
         //History users
         var data6 = [<?php echo chart(6, 'values');?>];
         var ticks6 = [<?php echo chart(6, 'ticks');?>];
-        cshbarplot('history-users', data6.splice(data6.length-26,26),ticks6.splice(ticks6.length-26,26), 'Users', '#C5B47F');
+        cshbarplot('history-users', data6.splice(data6.length-26,26),ticks6.splice(ticks6.length-26,26), 'Users', '#4BB2C5');
         //History sessions
         var data7 = [<?php echo chart(7, 'values');?>];
         var ticks7 = [<?php echo chart(7, 'ticks');?>];
@@ -166,10 +173,14 @@
         //csbarplot('chart-packagers', data10, ticks10);
         //var pie10 = [<?php echo chart(10, 'pie');?>];
         //cspieplot("chart-pie10", pie10);
-        //History portals
+        //History of portals per year
         var data11 = [<?php echo chart(11, 'values');?>];
         var ticks11 = [<?php echo chart(11, 'ticks');?>];
-        cshbarplot('history-portal-year', data11.splice(data11.length-26,26),ticks11.splice(ticks11.length-26,26), 'Portals per year', '#4BB2C5');
+        cshbarplot('history-portal-year', data11.splice(data11.length-26,26),ticks11.splice(ticks11.length-26,26), 'Portals per year', '#C5B47F');
+        // History of users per year
+        var data12 = [<?php echo chart(12, 'values');?>];
+        var ticks12 = [<?php echo chart(12, 'ticks');?>];
+        cshbarplot('history-user-year', data12.splice(data12.length-26,26),ticks12.splice(ticks12.length-26,26), 'Users per year', '#4BB2C5');
     </script>
 </footer>
 </html>
