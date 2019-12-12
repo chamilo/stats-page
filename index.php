@@ -112,7 +112,7 @@
 
 <a name="history-user-year" />
 <div id="Chart12" class="chart-user-history">
-    <h2>Total Chamilo users installed (cumulative, by year) [<?php echo $date;?>]</h2>
+    <h2>Total Chamilo user accounts created (cumulative, by year) [<?php echo $date;?>]</h2>
 
     <div id="history-user-year"></div>
 </div>
