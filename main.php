@@ -264,6 +264,32 @@ function retrieveData($type) {
                 $table[] = $row;
             }
             break;
+        case 13:
+            // Select new users per month, non-cumulative
+            $sql = "SELECT LEFT(log_time,7) AS fecha,
+                      MAX(numusers) as N
+                      FROM history
+                      WHERE log_time > DATE_SUB(NOW(), INTERVAL 27 MONTH)
+                      GROUP BY fecha
+                    ";
+            $result = $myDB->query($sql);
+            $tableTemp = [];
+            while ($row = $result->fetch()) {
+                $tableTemp[] = $row;
+            }
+            // Use the difference between this month and the previous one to
+            // determine the number of new users
+            foreach($tableTemp as $i => $line) {
+                $num = 0;
+                if ($i != 0) {
+                    $num = $tableTemp[$i]['N'] - $tableTemp[$i-1]['N'];
+                }
+                $table[] = [
+                    'fecha' => $line['fecha'],
+                    'N' => $num,
+                ];
+            }
+            break;
     }
     return $table;
 }
@@ -312,6 +338,10 @@ function chart($num = 0, $op = 'values')
             break;
         case 11:
         case 12:
+            $etiqueta = 'fecha';
+            $dato = 'N';
+            break;
+        case 13:
             $etiqueta = 'fecha';
             $dato = 'N';
             break;

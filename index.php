@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <!-- HTML5 Document -->
 <html>
-<meta charset="utf-8">
-<title>Official Chamilo statistics page</title>
 <head>
+    <meta charset="utf-8">
+    <title>Official Chamilo statistics page</title>
     <link rel="stylesheet" href="css/jquery.jqplot.css">
     <link rel="stylesheet" href="css/style.css">
     <!--[if IE]>
@@ -28,28 +28,28 @@
 <div id="title">
     <h1>Chamilo Stats</h1>
 </div>
-<a name="history-portal" />
+<a name="history-portal"></a>
 <div id="Chart4" class="chart-history">
     <h2>Total Chamilo portals installed (cumulative, by month) [<?php echo $date;?>]</h2>
 
     <div id="history-portal"></div>
 </div>
 
-<a name="history-users" />
+<a name="history-users"></a>
 <div id="Chart6" class="chart-history">
     <h2>Total Chamilo user accounts created (cumulative, by month) [<?php echo $date;?>]</h2>
 
     <div id="history-users"></div>
 </div>
 
-<a name="history-courses" />
+<a name="history-courses"></a>
 <div id="Chart5" class="chart-history">
     <h2>Total Chamilo courses created (cumulative, by month) [<?php echo $date;?>]</h2>
 
     <div id="history-courses"></div>
 </div>
 
-<a name="history-sessions" />
+<a name="history-sessions"></a>
 <div id="Chart7" class="chart-history">
     <h2>Total Chamilo course-sessions created (cumulative, by month) [<?php echo $date;?>]</h2>
 
@@ -70,7 +70,7 @@
 </div>
 <h4>(**) Only portals with more than 65 users updated over the last 26 months</h4>
 
-<a name="chart-install" />
+<a name="chart-install"></a>
 <div id="Chart1" class="chart-section">
     <h2>Versions installed [<?php echo $date;?>]</h2>
 
@@ -79,7 +79,7 @@
     <div id="chart-pie1" class="pie" style="height: 400px; width: 400px"></div>
 
 </div>
-<a name="chart-courses" />
+<a name="chart-courses"></a>
 <div id="Chart2" class="chart-section">
     <h2>Courses created per Chamilo version [<?php echo $date;?>]</h2>
 
@@ -87,7 +87,7 @@
 
     <div id="chart-pie2" class="pie" style="height: 400px; width: 400px"></div>
 </div>
-<a name="chart-users" />
+<a name="chart-users"></a>
 <div id="Chart3" class="chart-section">
     <h2>Users created per Chamilo version [<?php echo $date;?>]</h2>
 
@@ -103,21 +103,26 @@
 
     <div id="chart-pie10" class="pie" style="height: 400px; width: 400px"></div>
 </div-->
-<a name="history-portal-year" />
+<a name="history-portal-year"></a>
 <div id="Chart11" class="chart-portal-history">
     <h2>Total Chamilo portals installed (cumulative, by year) [<?php echo $date;?>]</h2>
 
     <div id="history-portal-year"></div>
 </div>
 
-<a name="history-user-year" />
+<a name="history-user-year"></a>
 <div id="Chart12" class="chart-user-history">
     <h2>Total Chamilo user accounts created (cumulative, by year) [<?php echo $date;?>]</h2>
 
     <div id="history-user-year"></div>
 </div>
 
-</body>
+<a name="history-new-user-month-non-cumulative"></a>
+<div id="Chart13" class="chart-new-user-history">
+    <h2>New Chamilo user accounts created each month [<?php echo $date;?>]</h2>
+
+    <div id="history-new-user-month-non-cumulative"></div>
+</div>
 
 <footer>
     <script>
@@ -181,6 +186,11 @@
         var data12 = [<?php echo chart(12, 'values');?>];
         var ticks12 = [<?php echo chart(12, 'ticks');?>];
         cshbarplot('history-user-year', data12.splice(data12.length-26,26),ticks12.splice(ticks12.length-26,26), 'Users per year', '#4BB2C5');
+        // History of users per month non-cumulative
+        var data13 = [<?php echo chart(13, 'values');?>];
+        var ticks13 = [<?php echo chart(13, 'ticks');?>];
+        cshbarplot('history-new-user-month-non-cumulative', data13.splice(data13.length-26,26),ticks13.splice(ticks13.length-26,26), 'New users per month', '#EAA228');
     </script>
 </footer>
+</body>
 </html>
