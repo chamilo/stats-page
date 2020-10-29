@@ -41,7 +41,8 @@ function cspieplot(container, pie) {
     });
 }
 
-function cshbarplot(container, data, ticks, portal, color) {
+function cshbarplot(container, data, ticks, portal, color, miny) {
+    if (miny == undefined) { miny = 0; }
     return $.jqplot(container, [data], {
         seriesColors:[ color],
         animate:!$.jqplot.use_excanvas,
@@ -69,7 +70,7 @@ function cshbarplot(container, data, ticks, portal, color) {
                 tickOptions:{
                     formatString:'%d'
                 },
-                min:0
+                min:miny
             }
         },
         highlighter:{

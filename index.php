@@ -151,19 +151,19 @@
         //History portals
         var data4 = [<?php echo chart(4, 'values');?>];
         var ticks4 = [<?php echo chart(4, 'ticks');?>];
-        cshbarplot('history-portal', data4.splice(data4.length-26,26),ticks4.splice(ticks4.length-26,26), 'Portals', '#C5B47F');
+        cshbarplot('history-portal', data4.splice(data4.length-26,26),ticks4.splice(ticks4.length-26,26), 'Portals', '#C5B47F', 40000);
         //History courses
         var data5 = [<?php echo chart(5, 'values');?>];
         var ticks5 = [<?php echo chart(5, 'ticks');?>];
-        cshbarplot('history-courses', data5.splice(data5.length-26,26),ticks5.splice(ticks5.length-26,26), 'Courses', '#839557');
+        cshbarplot('history-courses', data5.splice(data5.length-26,26),ticks5.splice(ticks5.length-26,26), 'Courses', '#839557', 1500000);
         //History users
         var data6 = [<?php echo chart(6, 'values');?>];
         var ticks6 = [<?php echo chart(6, 'ticks');?>];
-        cshbarplot('history-users', data6.splice(data6.length-26,26),ticks6.splice(ticks6.length-26,26), 'Users', '#4BB2C5');
+        cshbarplot('history-users', data6.splice(data6.length-26,26),ticks6.splice(ticks6.length-26,26), 'Users', '#4BB2C5', 20000000);
         //History sessions
         var data7 = [<?php echo chart(7, 'values');?>];
         var ticks7 = [<?php echo chart(7, 'ticks');?>];
-        cshbarplot('history-sessions', data7.splice(data7.length-26,26),ticks7.splice(ticks7.length-26,26), 'Sessions', '#C5542F');
+        cshbarplot('history-sessions', data7.splice(data7.length-26,26),ticks7.splice(ticks7.length-26,26), 'Sessions', '#C5542F', 700000);
         //Ranges of users
         var data8 = [<?php echo chart(8, 'values');?>];
         var ticks8 = [<?php echo chart(8, 'ticks');?>];
