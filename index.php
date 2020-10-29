@@ -78,7 +78,7 @@
 <div id="Chart1" class="chart-section">
     <h2>Versions installed [<?php echo $date;?>]</h2>
 
-    <div id="chart-install" class="bar" style="height: 400px; width: 600px"></div>
+    <div id="chart-install" class="bar" style="height: 400px; width: 700px"></div>
 
     <div id="chart-pie1" class="pie" style="height: 400px; width: 400px"></div>
 
@@ -87,7 +87,7 @@
 <div id="Chart2" class="chart-section">
     <h2>Courses created per Chamilo version [<?php echo $date;?>]</h2>
 
-    <div id="chart-courses" class="bar" style="height: 400px; width: 600px"></div>
+    <div id="chart-courses" class="bar" style="height: 400px; width: 700px"></div>
 
     <div id="chart-pie2" class="pie" style="height: 400px; width: 400px"></div>
 </div>
@@ -95,7 +95,7 @@
 <div id="Chart3" class="chart-section">
     <h2>Users created per Chamilo version [<?php echo $date;?>]</h2>
 
-    <div id="chart-users" class="bar" style="height: 400px; width: 600px"></div>
+    <div id="chart-users" class="bar" style="height: 400px; width: 700px"></div>
 
     <div id="chart-pie3" class="pie" style="height: 400px; width: 400px"></div>
 </div>
@@ -103,7 +103,7 @@
 <div id="Chart10" class="chart-section">
     <h2>Portals per packager [<?php echo $date;?>]</h2>
 
-    <div id="chart-packagers" class="bar" style="height: 400px; width: 600px"></div>
+    <div id="chart-packagers" class="bar" style="height: 400px; width: 700px"></div>
 
     <div id="chart-pie10" class="pie" style="height: 400px; width: 400px"></div>
 </div-->
