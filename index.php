@@ -28,6 +28,10 @@
 <div id="title">
     <h1>Chamilo Stats</h1>
 </div>
+<div id="Chart4" class="chart-history" style="height: 500px;">
+    <h2>Worldwide use of *just* campus.chamilo.org (1 out of 70k+ portals) [2020]</h3>
+    <img src="images/chamilo-worldwide-map.png" width="650" height="400" style="margin-left: 20%">
+</div>
 <a name="history-portal"></a>
 <div id="Chart4" class="chart-history">
     <h2>Total Chamilo portals installed (cumulative, by month) [<?php echo $date;?>]</h2>
