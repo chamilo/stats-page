@@ -21,18 +21,24 @@ try {
 } catch (PDOException $e) {
     die('Could not connect to the database');
 }
+$apcu = function_exists('apcu_exists');
 // Before anything, collect an array of all the portals in their latest version
 $ids = '';
-$sql = "SELECT portal_url, max(id) as pid 
+if (apcu_exists('chamilo-stats-url-ids')) {
+    $ids = apcu_fetch('chamilo-stats-url-ids');
+} else {
+    $sql = "SELECT portal_url, max(id) as pid 
         FROM community 
         WHERE portal_version IN (".CHA_VERSIONS.")
         GROUP BY portal_url
         ";
-$result = $myDB->query($sql);
-while ($row = $result->fetch()) {
-    $ids .= $row['pid'].',';
+    $result = $myDB->query($sql);
+    while ($row = $result->fetch()) {
+        $ids .= $row['pid'].',';
+    }
+    $ids = substr($ids, 0, -1);
+    apcu_store('chamilo-stats-url-ids', $ids, 300);
 }
-$ids = substr($ids, 0, -1);
 
 // Prepare an ordered list of versions
 $versions = str_replace("'", '', CHA_VERSIONS);
