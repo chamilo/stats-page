@@ -149,9 +149,9 @@ function retrieveData($type) {
 
         case 4:
             /* Number of portals per month since 2010*/
-            $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha,
-                      MAX(numportals) as N 
-                      FROM history
+            $sql = "SELECT yearmmonth AS fecha,
+                      numportals as N 
+                      FROM monthly_history
                       GROUP BY fecha
                     ";
             $result = $myDB->query($sql);
@@ -162,9 +162,9 @@ function retrieveData($type) {
 
         case 5:
             /* Number of courses per month since 2010*/
-            $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha,
-                      MAX(numcourses) as N
-                      FROM history GROUP BY fecha
+            $sql = "SELECT yearmonth AS fecha,
+                      numcourses as N
+                      FROM monthly_history GROUP BY fecha
                       ";
             $result = $myDB->query($sql);
             while ($row = $result->fetch()) {
@@ -174,9 +174,9 @@ function retrieveData($type) {
 
         case 6:
             /* Number of users per month since 2010*/
-            $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha,
-                      MAX(numusers) as N
-                      FROM history
+            $sql = "SELECT yearmonth AS fecha,
+                      numusers as N
+                      FROM monthly_history
                       GROUP BY fecha
                       ";
             $result = $myDB->query($sql);
@@ -187,8 +187,8 @@ function retrieveData($type) {
 
         case 7:
             /* Number of sessions per month since 2010*/
-            $sql = "SELECT RIGHT(LEFT(log_time,7),5) AS fecha,
-                      MAX(numsessions) as N 
+            $sql = "SELECT yearmonth AS fecha,
+                      numsessions as N 
                       FROM history
                       GROUP BY fecha
                       ";
@@ -252,9 +252,9 @@ function retrieveData($type) {
             break;
         case 11:
             // Select portals per year
-            $sql = "SELECT LEFT(log_time,4) AS fecha,
+            $sql = "SELECT LEFT(yearmonth,2) AS fecha,
                       MAX(numportals) as N 
-                      FROM history
+                      FROM monthly_history
                       GROUP BY fecha
                     ";
             $result = $myDB->query($sql);
@@ -264,9 +264,9 @@ function retrieveData($type) {
             break;
         case 12:
             // Select users per year
-            $sql = "SELECT LEFT(log_time,4) AS fecha,
+            $sql = "SELECT LEFT(yearmonth,4) AS fecha,
                       MAX(numusers) as N
-                      FROM history
+                      FROM monthly_history
                       GROUP BY fecha
                     ";
             $result = $myDB->query($sql);
