@@ -37,7 +37,11 @@ if (apcu_exists('chamilo-stats-url-ids')) {
         $ids .= $row['pid'].',';
     }
     $ids = substr($ids, 0, -1);
-    apcu_store('chamilo-stats-url-ids', $ids, 300);
+    $cacheTime = 300;
+    if (!empty($statsCache)) {
+        $cacheTime = $statsCache;
+    }
+    apcu_store('chamilo-stats-url-ids', $ids, $cacheTime);
 }
 
 // Prepare an ordered list of versions
